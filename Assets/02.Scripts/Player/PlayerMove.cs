@@ -1,5 +1,8 @@
+using System;
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using static System.Math;
 
 public class PlayerMove : MonoBehaviour
 {
@@ -12,8 +15,7 @@ public class PlayerMove : MonoBehaviour
     public float Bottom;
     public float Left;
     public float Right;
-    
-    private Queue Replay = new Queue();
+
     // 매 프레임마다 실행된다.
     // 초당 프레임 실행 횟수는: 별다은 설정이 없을 경우 가능한 많이
     private void Update()
@@ -27,7 +29,11 @@ public class PlayerMove : MonoBehaviour
         
         // 2. 키보드 입력에 따라 방향을 구한다.
         // 3. 방향과 속도에 따라 이동한다.
-        moving(h, v);
+        Vector2 normalizedSpeed = move(h, v);
+
+        var positionY = transform.position;
+        positionY.y = Math.Clamp(transform.position.y, Bottom, Top);
+        transform.position = positionY;
         
         // 새로운 위치 = 현재 위치 + (방향 * 속력 * 시간)
         // transform.position = transform.position + (Vector3)direction * Speed * Time.deltaTime;
@@ -50,37 +56,8 @@ public class PlayerMove : MonoBehaviour
         */
     }
 
-    private void moving(float h, float v)
+    private Vector2 move(float h, float v)
     {
-        if (transform.position.y >= Top)
-        {
-            if (v > 0)
-            {
-                v = 0;
-            }
-        }
-        else if (transform.position.y <= Bottom)
-        {
-            if (v < 0)
-            {
-                v = 0;
-            }
-        }
-        else if(transform.position.x >= Right)
-        {
-            if (h > 0)
-            {
-                h = 0;
-            }
-        }
-        else if (transform.position.x <= Left)
-        {
-            if (h < 0)
-            {
-                h = 0;
-            }
-        }
-        
         if (transform.position.x <= Left)
         {
             transform.position = new Vector3(-Left, transform.position.y, transform.position.z);
@@ -109,11 +86,13 @@ public class PlayerMove : MonoBehaviour
         }
         
         transform.Translate( normalizedSpeed * Time.deltaTime);
+
+        return normalizedSpeed;
     }
 
     private void SaveKey(float h, float v, Vector2 normalizedSpeed)
     {
-        
+
     } 
     private void ExcuteReplay()
     {
