@@ -16,9 +16,10 @@ public class PlayerFire : MonoBehaviour
     private float OriginCoolTime;
 
     private bool AutoMode = false;
-
+    private string ObjectName;
     private void Start()
     {
+        ObjectName = gameObject.name;
         OriginCoolTime = CoolTime;
     }
 
@@ -56,8 +57,22 @@ public class PlayerFire : MonoBehaviour
             // 2. 총알 프리팹을 생성한다.
             // Instantiate 는 프리팹을 복사해서 (Monobehaviour를 상속받는) 게임 오브젝트를 생성하고 씬에 넣어주는 기능
             GameObject bullet = Instantiate(BulletPrefab);
-            
+            GameObject subBullet = Instantiate(SubBulletPrefab);
+
             bullet.transform.position = FirePoint.position;
+            switch (ObjectName)
+            {
+                case "FireLeftPoint":
+                {
+                    subBullet.transform.position = new Vector3(FirePoint.position.x - 0.05f, FirePoint.position.y-0.05f, FirePoint.position.z);
+                    break;
+                }
+                case "FireRightPoint":
+                {
+                    subBullet.transform.position = new Vector3(FirePoint.position.x + 0.05f, FirePoint.position.y-0.05f, FirePoint.position.z);
+                    break;
+                }
+            }
             
             CoolDown = true;
             CoolTime = OriginCoolTime;
@@ -69,9 +84,7 @@ public class PlayerFire : MonoBehaviour
         // 쿨타임 이라면
         if (CoolDown)
         {
-            CoolTime = CoolTime - Time.deltaTime;
-            
-            Debug.Log(CoolTime);
+            CoolTime -= Time.deltaTime;
         }
 
         if (CoolTime <= 0)
