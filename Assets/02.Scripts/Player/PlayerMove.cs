@@ -2,7 +2,9 @@ using System;
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using static System.Math;
+using Object = System.Object;
 
 public class PlayerMove : MonoBehaviour
 {
@@ -16,6 +18,17 @@ public class PlayerMove : MonoBehaviour
     public float Left;
     public float Right;
 
+    private List<string> CommandList = new List<string>();
+    private bool IsReplay = false;
+
+    private Vector3 StartPosition;
+
+    void Start()
+    {
+        // 게임 시작 시점의 위치를 변수에 저장
+        StartPosition = transform.position;
+    }
+    
     // 매 프레임마다 실행된다.
     // 초당 프레임 실행 횟수는: 별다은 설정이 없을 경우 가능한 많이
     private void Update()
@@ -23,22 +36,42 @@ public class PlayerMove : MonoBehaviour
         // 1. 키보드 입력을 받는다.
         float h = Input.GetAxis("Horizontal");  // 키보드 왼/오른쪽 입력 상태에 따라(서서히 증가 및 감소) -1f ~ 0 ~ 1f
         float v = Input.GetAxis("Vertical");    // 키보드 위/아래 입력 상태에 따라(서서히 증가 및 감소) -1f ~ 0 ~ 1f
-
+        string mutiply = "";
         // float h = Input.GetAxisRaw("Horizontal");   //곧바로 -1 0 1 반환
         // float v = Input.GetAxisRaw("Vertical");   //곧바로 -1 0 1 반환
         
+        
         // 2. 키보드 입력에 따라 방향을 구한다.
         // 3. 방향과 속도에 따라 이동한다.
-        Vector2 normalizedSpeed = move(h, v);
-
-        var positionY = transform.position;
-        positionY.y = Math.Clamp(transform.position.y, Bottom, Top);
-        transform.position = positionY;
+        if (Input.GetKey(KeyCode.R))
+        {
+            IsReplay = true;
+            transform.position = StartPosition;
+        }
+        if (IsReplay)
+        {
+            ExcuteReplay();
+        }
+        else
+        {
+            SaveKey();
+            if (Input.GetKey(KeyCode.E))
+            {
+                mutiply = "speedUp";
+            }
         
+            if (Input.GetKey(KeyCode.Q))
+            {
+                mutiply = "speedDown";
+            }
+            
+            Move(h, v, mutiply);
+                 
+        }
+
         // 새로운 위치 = 현재 위치 + (방향 * 속력 * 시간)
         // transform.position = transform.position + (Vector3)direction * Speed * Time.deltaTime;
         // transform.position += (Vector3)direction * Speed * Time.deltaTime;
-
 
         // 키 입력을 받으면
         /*
@@ -56,7 +89,7 @@ public class PlayerMove : MonoBehaviour
         */
     }
 
-    private Vector2 move(float h, float v)
+    private void Move(float h, float v, string mutiply)
     {
         if (transform.position.x <= Left)
         {
@@ -75,27 +108,97 @@ public class PlayerMove : MonoBehaviour
         // 대각선이 더 빠른것을 보간작업
         Vector2 normalizedSpeed = (direction * Speed).normalized; // 벡터의 길이를 1로 만들어주는것 (즉, 방향만 유지)
 
-        if (Input.GetKey(KeyCode.E))
+        if (mutiply == "speedUp")
         {
             normalizedSpeed *= 2;
         }
-        
-        if (Input.GetKey(KeyCode.Q))
+
+        if (mutiply == "speedDown")
         {
             normalizedSpeed /= 2;
         }
         
         transform.Translate( normalizedSpeed * Time.deltaTime);
-
-        return normalizedSpeed;
+        
+        var positionY = transform.position;
+        positionY.y = Math.Clamp(transform.position.y, Bottom, Top);
+        transform.position = positionY;
     }
 
-    private void SaveKey(float h, float v, Vector2 normalizedSpeed)
+    private void SaveKey()
     {
-
+        if (Input.GetKey(KeyCode.LeftArrow))
+        {
+            CommandList.Add("left");
+        }
+        if (Input.GetKey(KeyCode.RightArrow))
+        {
+            CommandList.Add("right");
+        }
+        if (Input.GetKey(KeyCode.UpArrow))
+        {
+            CommandList.Add("up");
+        }
+        if (Input.GetKey(KeyCode.DownArrow))
+        {
+            CommandList.Add("down");
+        }
+        if (Input.GetKey(KeyCode.E))
+        {
+            CommandList.Add("speedUp");
+        }
+        if (Input.GetKey(KeyCode.Q))
+        {
+            CommandList.Add("speedDown");
+        }
     } 
     private void ExcuteReplay()
     {
+        float h = 0f;
+        float v = 0f;
+        string multiply = "";
+        
+        switch (CommandList[0])
+        {
+            case "left":
+            {
+                h = -1;
+                break;
+            }
+            case "right":
+            {
+                h = 1;
+                break;
+            }
+            case "up":
+            {
+                v = 1;
+                break;
+            }
+            case "down":
+            {
+                v = -1;
+                break;
+            }
+            case "speedUp":
+            {
+                multiply = "speedUp";
+                break;
+            }
+            case "speedDown":
+            {
+                multiply = "speedDown";
+                break;
+            } 
+        }
+        
+        Move(h,v,multiply);
+        
+        CommandList.RemoveAt(0);
+        if (CommandList.Count <= 1)
+        {
+            IsReplay = false;            
+        }
         
     }
 }
