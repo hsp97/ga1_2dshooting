@@ -6,7 +6,11 @@ public class PlayerMove : MonoBehaviour
     
     // 필요 필드:
     public float Speed;
-    
+
+    public float Top;
+    public float Bottom;
+    public float Left;
+    public float Right;
     
     // 매 프레임마다 실행된다.
     // 초당 프레임 실행 횟수는: 별다은 설정이 없을 경우 가능한 많이
@@ -24,18 +28,53 @@ public class PlayerMove : MonoBehaviour
         // 2. 키보드 입력에 따라 방향을 구한다.
         // 3. 방향과 속도에 따라 이동한다.
         
+        if (transform.position.y >= Top)
+        {
+            if (v > 0)
+            {
+                v = 0;
+            }
+        }
+        else if (transform.position.y <= Bottom)
+        {
+            if (v < 0)
+            {
+                v = 0;
+            }
+        }
+        else if(transform.position.x >= Right)
+        {
+            if (h > 0)
+            {
+                h = 0;
+            }
+        }
+        else if (transform.position.x <= Left)
+        {
+            if (h < 0)
+            {
+                h = 0;
+            }
+        }
+        
         // 방향(벡터)를 계산해서
         // 게임에는 벡터라는 타입이 있다. 벡터는 크기와 방향을 의미한다.
         Vector2 direction = new Vector2(h, v);
         // = Vector2 direction = Vector2.left;
-
+        
         // 대각선이 더 빠른것을 보간작업
         Vector2 normalizedSpeed = (direction * Speed).normalized; // 벡터의 길이를 1로 만들어주는것 (즉, 방향만 유지)
-        transform.Translate(direction * (normalizedSpeed * Time.deltaTime));
+        
+        transform.Translate( normalizedSpeed * Time.deltaTime);
         
         // 새로운 위치 = 현재 위치 + (방향 * 속력 * 시간)
         // transform.position = transform.position + (Vector3)direction * Speed * Time.deltaTime;
         // transform.position += (Vector3)direction * Speed * Time.deltaTime;
+
+        
+        
+            
+        
 
         // 키 입력을 받으면
         /*
