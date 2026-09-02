@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class PlayerMove : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class PlayerMove : MonoBehaviour
     public float Left;
     public float Right;
     
+    private Queue Replay = new Queue();
     // 매 프레임마다 실행된다.
     // 초당 프레임 실행 횟수는: 별다은 설정이 없을 경우 가능한 많이
     private void Update()
@@ -25,6 +27,31 @@ public class PlayerMove : MonoBehaviour
         
         // 2. 키보드 입력에 따라 방향을 구한다.
         // 3. 방향과 속도에 따라 이동한다.
+        moving(h, v);
+        
+        // 새로운 위치 = 현재 위치 + (방향 * 속력 * 시간)
+        // transform.position = transform.position + (Vector3)direction * Speed * Time.deltaTime;
+        // transform.position += (Vector3)direction * Speed * Time.deltaTime;
+
+
+        // 키 입력을 받으면
+        /*
+        if (Input.GetKey(KeyCode.LeftArrow))
+        {
+            // 이동한다.
+            // 속도 =  방향 * 속력
+
+            // 0.06 -> 하드 코딩 -> 헷갈리는 숫자 -> 매직넘버링
+            // 매직넘버란 : 보는 사람에 따라 의미가 달라질 수 있는 헷갈리는 숫자
+
+            transform.Translate(direction * (Speed * Time.deltaTime));
+            // deltaTime: 이전 프레임으로부터 지금 프레임까지 시간이 얼마나 지났는지 MS로 반환
+        }
+        */
+    }
+
+    private void moving(float h, float v)
+    {
         if (transform.position.y >= Top)
         {
             if (v > 0)
@@ -82,33 +109,14 @@ public class PlayerMove : MonoBehaviour
         }
         
         transform.Translate( normalizedSpeed * Time.deltaTime);
+    }
 
+    private void SaveKey(float h, float v, Vector2 normalizedSpeed)
+    {
         
-        // 새로운 위치 = 현재 위치 + (방향 * 속력 * 시간)
-        // transform.position = transform.position + (Vector3)direction * Speed * Time.deltaTime;
-        // transform.position += (Vector3)direction * Speed * Time.deltaTime;
-
+    } 
+    private void ExcuteReplay()
+    {
         
-        
-            
-        
-
-        // 키 입력을 받으면
-        /*
-        if (Input.GetKey(KeyCode.LeftArrow))
-        {
-            // 이동한다.
-            // 속도 =  방향 * 속력
-
-            // 0.06 -> 하드 코딩 -> 헷갈리는 숫자 -> 매직넘버링
-            // 매직넘버란 : 보는 사람에 따라 의미가 달라질 수 있는 헷갈리는 숫자
-
-            transform.Translate(direction * (Speed * Time.deltaTime));
-            // deltaTime: 이전 프레임으로부터 지금 프레임까지 시간이 얼마나 지났는지 MS로 반환
-        }
-        */
-
-
-
     }
 }
