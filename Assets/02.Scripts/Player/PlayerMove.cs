@@ -21,6 +21,8 @@ public class PlayerMove : MonoBehaviour
     private List<string> CommandList = new List<string>();
     private bool IsReplay = false;
 
+    private float h = 0f;
+    private float v = 0f;
     private Vector3 StartPosition;
 
     void Start()
@@ -33,9 +35,14 @@ public class PlayerMove : MonoBehaviour
     // 초당 프레임 실행 횟수는: 별다은 설정이 없을 경우 가능한 많이
     private void Update()
     {
+        if (CommandList.Count == 0)
+        {
+            StartPosition = transform.position;
+        }
+        
         // 1. 키보드 입력을 받는다.
-        float h = Input.GetAxis("Horizontal");  // 키보드 왼/오른쪽 입력 상태에 따라(서서히 증가 및 감소) -1f ~ 0 ~ 1f
-        float v = Input.GetAxis("Vertical");    // 키보드 위/아래 입력 상태에 따라(서서히 증가 및 감소) -1f ~ 0 ~ 1f
+        h = Input.GetAxis("Horizontal");  // 키보드 왼/오른쪽 입력 상태에 따라(서서히 증가 및 감소) -1f ~ 0 ~ 1f
+        v = Input.GetAxis("Vertical");    // 키보드 위/아래 입력 상태에 따라(서서히 증가 및 감소) -1f ~ 0 ~ 1f
         string mutiply = "";
         // float h = Input.GetAxisRaw("Horizontal");   //곧바로 -1 0 1 반환
         // float v = Input.GetAxisRaw("Vertical");   //곧바로 -1 0 1 반환
@@ -50,7 +57,24 @@ public class PlayerMove : MonoBehaviour
         }
         if (IsReplay)
         {
-            ExcuteReplay();
+            string multiply = "";
+            switch (CommandList[0])
+            {
+                case "speedUp":
+                {
+                    multiply = "speedUp";
+                    CommandList.RemoveAt(0);
+                    break;
+                }
+                case "speedDown":
+                {
+                    multiply = "speedDown";
+                    CommandList.RemoveAt(0);
+                    break;
+                }   
+            }
+            
+            ExcuteReplay(multiply);
         }
         else
         {
@@ -68,25 +92,6 @@ public class PlayerMove : MonoBehaviour
             Move(h, v, mutiply);
                  
         }
-
-        // 새로운 위치 = 현재 위치 + (방향 * 속력 * 시간)
-        // transform.position = transform.position + (Vector3)direction * Speed * Time.deltaTime;
-        // transform.position += (Vector3)direction * Speed * Time.deltaTime;
-
-        // 키 입력을 받으면
-        /*
-        if (Input.GetKey(KeyCode.LeftArrow))
-        {
-            // 이동한다.
-            // 속도 =  방향 * 속력
-
-            // 0.06 -> 하드 코딩 -> 헷갈리는 숫자 -> 매직넘버링
-            // 매직넘버란 : 보는 사람에 따라 의미가 달라질 수 있는 헷갈리는 숫자
-
-            transform.Translate(direction * (Speed * Time.deltaTime));
-            // deltaTime: 이전 프레임으로부터 지금 프레임까지 시간이 얼마나 지났는지 MS로 반환
-        }
-        */
     }
 
     private void Move(float h, float v, string mutiply)
@@ -152,47 +157,38 @@ public class PlayerMove : MonoBehaviour
             CommandList.Add("speedDown");
         }
     } 
-    private void ExcuteReplay()
+    private void ExcuteReplay(string multiply)
     {
         float h = 0f;
         float v = 0f;
-        string multiply = "";
         
         switch (CommandList[0])
         {
             case "left":
             {
-                h = -1;
+                h = h + (-1) * Speed * Time.deltaTime;
+                Move(h,v,multiply);
                 break;
             }
             case "right":
             {
-                h = 1;
+                h = h + (1) * Speed * Time.deltaTime;
+                Move(h,v,multiply);
                 break;
             }
             case "up":
             {
                 v = 1;
+                Move(h,v,multiply);
                 break;
             }
             case "down":
             {
                 v = -1;
+                Move(h,v,multiply);
                 break;
             }
-            case "speedUp":
-            {
-                multiply = "speedUp";
-                break;
-            }
-            case "speedDown":
-            {
-                multiply = "speedDown";
-                break;
-            } 
         }
-        
-        Move(h,v,multiply);
         
         CommandList.RemoveAt(0);
         if (CommandList.Count <= 1)
@@ -201,4 +197,23 @@ public class PlayerMove : MonoBehaviour
         }
         
     }
+    
+    // 새로운 위치 = 현재 위치 + (방향 * 속력 * 시간)
+    // transform.position = transform.position + (Vector3)direction * Speed * Time.deltaTime;
+    // transform.position += (Vector3)direction * Speed * Time.deltaTime;
+
+    // 키 입력을 받으면
+    /*
+    if (Input.GetKey(KeyCode.LeftArrow))
+    {
+        // 이동한다.
+        // 속도 =  방향 * 속력
+
+        // 0.06 -> 하드 코딩 -> 헷갈리는 숫자 -> 매직넘버링
+        // 매직넘버란 : 보는 사람에 따라 의미가 달라질 수 있는 헷갈리는 숫자
+
+        transform.Translate(direction * (Speed * Time.deltaTime));
+        // deltaTime: 이전 프레임으로부터 지금 프레임까지 시간이 얼마나 지났는지 MS로 반환
+    }
+    */
 }
