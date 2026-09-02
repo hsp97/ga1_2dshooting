@@ -109,19 +109,19 @@ public class PlayerMove : MonoBehaviour
         // = Vector2 direction = Vector2.left;
         
         // 대각선이 더 빠른것을 보간작업
-        Vector2 normalizedSpeed = (direction * Speed).normalized; // 벡터의 길이를 1로 만들어주는것 (즉, 방향만 유지)
+        Vector2 normalizedDirection = direction.normalized; // 벡터의 길이를 1로 만들어주는것 (즉, 방향만 유지)
 
         if (mutiply == "speedUp")
         {
-            normalizedSpeed *= 2;
+            normalizedDirection *= 2;
         }
 
         if (mutiply == "speedDown")
         {
-            normalizedSpeed /= 2;
+            normalizedDirection /= 2;
         }
         
-        transform.Translate( normalizedSpeed * Time.deltaTime);
+        transform.Translate( normalizedDirection * Speed * Time.deltaTime);
         
         var positionY = transform.position;
         positionY.y = Math.Clamp(transform.position.y, MinPositionY, MaxPositionY);
