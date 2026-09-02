@@ -7,13 +7,17 @@ public class PlayerMove : MonoBehaviour
     // 필요 필드:
     public float Speed;
     
+    
     // 매 프레임마다 실행된다.
     // 초당 프레임 실행 횟수는: 별다은 설정이 없을 경우 가능한 많이
     private void Update()
     {
         // 1. 키보드 입력을 받는다.
-        float h = Input.GetAxis("Horizontal");  // 키보드 왼/오른쪽 입력 상태에 따라 -1f ~ 0 ~ 1f
-        float v = Input.GetAxis("Vertical");    // 키보드 위/아래 입력 상태에 따라 -1f ~ 0 ~ 1f
+        float h = Input.GetAxis("Horizontal");  // 키보드 왼/오른쪽 입력 상태에 따라(서서히 증가 및 감소) -1f ~ 0 ~ 1f
+        float v = Input.GetAxis("Vertical");    // 키보드 위/아래 입력 상태에 따라(서서히 증가 및 감소) -1f ~ 0 ~ 1f
+
+        // float h = Input.GetAxisRaw("Horizontal");   //곧바로 -1 0 1 반환
+        // float v = Input.GetAxisRaw("Vertical");   //곧바로 -1 0 1 반환
 
         Debug.Log($"{h}, {v}");
         
@@ -25,12 +29,13 @@ public class PlayerMove : MonoBehaviour
         Vector2 direction = new Vector2(h, v);
         // = Vector2 direction = Vector2.left;
 
-        transform.Translate(direction * (Speed * Time.deltaTime));
+        // 대각선이 더 빠른것을 보간작업
+        Vector2 normalizedSpeed = (direction * Speed).normalized; // 벡터의 길이를 1로 만들어주는것 (즉, 방향만 유지)
+        transform.Translate(direction * (normalizedSpeed * Time.deltaTime));
         
         // 새로운 위치 = 현재 위치 + (방향 * 속력 * 시간)
-        transform.position = transform.position + (Vector3)direction * Speed * Time.deltaTime;
-        transform.position += (Vector3)direction * Speed * Time.deltaTime;
-        
+        // transform.position = transform.position + (Vector3)direction * Speed * Time.deltaTime;
+        // transform.position += (Vector3)direction * Speed * Time.deltaTime;
 
         // 키 입력을 받으면
         /*
