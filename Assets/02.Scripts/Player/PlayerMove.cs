@@ -13,10 +13,10 @@ public class PlayerMove : MonoBehaviour
     // 필요 필드:
     public float Speed;
 
-    public float Top;
-    public float Bottom;
-    public float Left;
-    public float Right;
+    public float MaxPositionY;
+    public float MinPositionY;
+    public float MinPositornX;
+    public float MaxPositornX;
 
     private List<string> CommandList = new List<string>();
     private bool IsReplay = false;
@@ -50,11 +50,6 @@ public class PlayerMove : MonoBehaviour
         
         // 2. 키보드 입력에 따라 방향을 구한다.
         // 3. 방향과 속도에 따라 이동한다.
-        if (Input.GetKey(KeyCode.R))
-        {
-            IsReplay = true;
-            transform.position = StartPosition;
-        }
         if (IsReplay)
         {
             string multiply = "";
@@ -76,33 +71,36 @@ public class PlayerMove : MonoBehaviour
             
             ExcuteReplay(multiply);
         }
-        else
-        {
-            SaveKey();
-            if (Input.GetKey(KeyCode.E))
-            {
-                mutiply = "speedUp";
-            }
         
-            if (Input.GetKey(KeyCode.Q))
-            {
-                mutiply = "speedDown";
-            }
-            
-            Move(h, v, mutiply);
-                 
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            IsReplay = true;
+            transform.position = StartPosition;
         }
+        
+        SaveKey();
+        if (Input.GetKey(KeyCode.E))
+        {
+            mutiply = "speedUp";
+        }
+        
+        if (Input.GetKey(KeyCode.Q))
+        {
+            mutiply = "speedDown";
+        }
+            
+        Move(h, v, mutiply);
     }
 
     private void Move(float h, float v, string mutiply)
     {
-        if (transform.position.x <= Left)
+        if (transform.position.x <= MinPositornX)
         {
-            transform.position = new Vector3(-Left, transform.position.y, transform.position.z);
+            transform.position = new Vector3(-MinPositornX, transform.position.y, transform.position.z);
         }
-        else if (transform.position.x >= Right)
+        else if (transform.position.x >= MaxPositornX)
         {
-            transform.position = new Vector3(-Right, transform.position.y, transform.position.z);
+            transform.position = new Vector3(-MaxPositornX, transform.position.y, transform.position.z);
         }
         
         // 방향(벡터)를 계산해서
@@ -126,7 +124,7 @@ public class PlayerMove : MonoBehaviour
         transform.Translate( normalizedSpeed * Time.deltaTime);
         
         var positionY = transform.position;
-        positionY.y = Math.Clamp(transform.position.y, Bottom, Top);
+        positionY.y = Math.Clamp(transform.position.y, MinPositionY, MaxPositionY);
         transform.position = positionY;
     }
 
