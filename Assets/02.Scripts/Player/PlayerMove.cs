@@ -22,12 +22,9 @@ public class PlayerMove : MonoBehaviour
 
         // float h = Input.GetAxisRaw("Horizontal");   //곧바로 -1 0 1 반환
         // float v = Input.GetAxisRaw("Vertical");   //곧바로 -1 0 1 반환
-
-        Debug.Log($"{h}, {v}");
         
         // 2. 키보드 입력에 따라 방향을 구한다.
         // 3. 방향과 속도에 따라 이동한다.
-        
         if (transform.position.y >= Top)
         {
             if (v > 0)
@@ -57,6 +54,15 @@ public class PlayerMove : MonoBehaviour
             }
         }
         
+        if (transform.position.x <= Left)
+        {
+            transform.position = new Vector3(-Left, transform.position.y, transform.position.z);
+        }
+        else if (transform.position.x >= Right)
+        {
+            transform.position = new Vector3(-Right, transform.position.y, transform.position.z);
+        }
+        
         // 방향(벡터)를 계산해서
         // 게임에는 벡터라는 타입이 있다. 벡터는 크기와 방향을 의미한다.
         Vector2 direction = new Vector2(h, v);
@@ -64,8 +70,19 @@ public class PlayerMove : MonoBehaviour
         
         // 대각선이 더 빠른것을 보간작업
         Vector2 normalizedSpeed = (direction * Speed).normalized; // 벡터의 길이를 1로 만들어주는것 (즉, 방향만 유지)
+
+        if (Input.GetKey(KeyCode.E))
+        {
+            normalizedSpeed *= 2;
+        }
+        
+        if (Input.GetKey(KeyCode.Q))
+        {
+            normalizedSpeed /= 2;
+        }
         
         transform.Translate( normalizedSpeed * Time.deltaTime);
+
         
         // 새로운 위치 = 현재 위치 + (방향 * 속력 * 시간)
         // transform.position = transform.position + (Vector3)direction * Speed * Time.deltaTime;
