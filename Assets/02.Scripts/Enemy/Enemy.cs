@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    public float Health = 100;
     public float MoveSpeed;
 
     private float _h = 0f;
@@ -15,11 +16,5 @@ public class Enemy : MonoBehaviour
 
         transform.position = new Vector3(transform.position.x, transform.position.y - MoveSpeed * Time.deltaTime,
             transform.position.z);
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        Destroy(this.gameObject);
-        Destroy(collision.gameObject);
     }
 }

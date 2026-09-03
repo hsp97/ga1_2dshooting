@@ -173,7 +173,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5058537866554621810, guid: 6089deb2093e58c4f93ea65123b8e3b5, type: 3}
       propertyPath: CoolTime
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5058537866554621810, guid: 6089deb2093e58c4f93ea65123b8e3b5, type: 3}
       propertyPath: SubBulletPrefab
@@ -247,7 +247,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5058537866554621810, guid: 6089deb2093e58c4f93ea65123b8e3b5, type: 3}
       propertyPath: CoolTime
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5058537866554621810, guid: 6089deb2093e58c4f93ea65123b8e3b5, type: 3}
       propertyPath: SubBulletPrefab
@@ -644,7 +644,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6428ee8df660be40ac51831a383f71a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMove
-  Speed: 7
+  Speed: 5
   MaxPositionY: 0
   MinPositionY: -4.75
   MinPositornX: -2.5
