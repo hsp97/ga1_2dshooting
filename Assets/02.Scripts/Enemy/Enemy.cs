@@ -3,9 +3,8 @@ using UnityEngine;
 
 public abstract class Enemy : MonoBehaviour
 {
-    public GameObject Player;
     [SerializeField]
-    private float _health;
+    protected float _health;
 
     private void Update()
     {

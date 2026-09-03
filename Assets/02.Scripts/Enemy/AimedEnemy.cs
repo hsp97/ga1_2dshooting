@@ -2,12 +2,18 @@ using UnityEngine;
 
 public class AimedEnemy : Enemy
 {
+    private GameObject _player;
     private Vector2 _direction;
     [SerializeField]
     private float _moveSpeed;
     private void Start()
     {
-        _direction = Player.transform.position - transform.position;
+        _player = GameObject.FindWithTag("Player");
+        if (_player == null)
+        {
+            Debug.LogError("No player found");
+        }
+        _direction = _player.transform.position - transform.position;
     }
     protected override void Move()
     {
