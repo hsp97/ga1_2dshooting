@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
@@ -14,5 +15,11 @@ public class Enemy : MonoBehaviour
 
         transform.position = new Vector3(transform.position.x, transform.position.y - MoveSpeed * Time.deltaTime,
             transform.position.z);
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        Destroy(this.gameObject);
+        Destroy(collision.gameObject);
     }
 }
