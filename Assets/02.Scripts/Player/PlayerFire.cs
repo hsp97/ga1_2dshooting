@@ -9,9 +9,9 @@ public class PlayerFire : MonoBehaviour
     public GameObject BulletPrefab;
     public GameObject SubBulletPrefab;
 
-    public Transform FirePoint;
+    public Transform FirePointTransform;
 
-    public float CoolTime = 5f;
+    public float CoolTime;
     private bool CoolDown = false;
     private float OriginCoolTime;
 
@@ -59,17 +59,17 @@ public class PlayerFire : MonoBehaviour
             GameObject bullet = Instantiate(BulletPrefab);
             GameObject subBullet = Instantiate(SubBulletPrefab);
 
-            bullet.transform.position = FirePoint.position;
+            bullet.transform.position = FirePointTransform.position;
             switch (ObjectName)
             {
                 case "FireLeftPoint":
                 {
-                    subBullet.transform.position = new Vector3(FirePoint.position.x - 0.05f, FirePoint.position.y-0.05f, FirePoint.position.z);
+                    subBullet.transform.position = new Vector3(FirePointTransform.position.x - 0.05f, FirePointTransform.position.y-0.05f, FirePointTransform.position.z);
                     break;
                 }
                 case "FireRightPoint":
                 {
-                    subBullet.transform.position = new Vector3(FirePoint.position.x + 0.05f, FirePoint.position.y-0.05f, FirePoint.position.z);
+                    subBullet.transform.position = new Vector3(FirePointTransform.position.x + 0.05f, FirePointTransform.position.y-0.05f, FirePointTransform.position.z);
                     break;
                 }
             }

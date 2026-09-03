@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using static System.Math;
+using Debug = UnityEngine.Debug;
 using Object = System.Object;
 
 public class PlayerMove : MonoBehaviour
@@ -94,11 +95,11 @@ public class PlayerMove : MonoBehaviour
 
     private void Move(float h, float v, string mutiply)
     {
-        if (transform.position.x <= MinPositornX)
+        if (transform.position.x < MinPositornX)
         {
             transform.position = new Vector3(-MinPositornX, transform.position.y, transform.position.z);
         }
-        else if (transform.position.x >= MaxPositornX)
+        else if (transform.position.x > MaxPositornX)
         {
             transform.position = new Vector3(-MaxPositornX, transform.position.y, transform.position.z);
         }
@@ -176,13 +177,13 @@ public class PlayerMove : MonoBehaviour
             }
             case "up":
             {
-                v = 1;
+                v = v + (1) * Speed * Time.deltaTime;
                 Move(h,v,multiply);
                 break;
             }
             case "down":
             {
-                v = -1;
+                v = v + (-1) * Speed * Time.deltaTime;
                 Move(h,v,multiply);
                 break;
             }
