@@ -1,11 +1,19 @@
 using System;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public abstract class Enemy : MonoBehaviour
 {
     public GameObject Player;
     [SerializeField]
     private float _health;
+
+    private void Update()
+    {
+        Move();
+    }
+
+    protected abstract void Move();
+
     public void CalculateHealth(float damge)
     {
         if (_health <= 0)
