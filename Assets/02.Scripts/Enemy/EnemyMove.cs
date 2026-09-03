@@ -4,16 +4,10 @@ public class EnemyMove : Enemy
 {
     private Vector2 _direction;
     public float MoveSpeed;
-    public float Health;
-    public EnemyMove(Vector2 direction, float moveSpeed, float health)
+    public EnemyMove(Vector2 direction, float moveSpeed)
     {
         _direction = direction;
         MoveSpeed = moveSpeed;
-        _health = health;
-    }
-    private void Start()
-    {
-        _health = Health;
     }
     private void Update()
     {
