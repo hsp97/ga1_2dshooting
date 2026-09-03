@@ -11,7 +11,7 @@ public class PlayerFire : MonoBehaviour
 
     public Transform FirePointTransform;
 
-    public float _coolTime;
+    public float CoolTime;
     private bool _coolDown = false;
     private float _originCoolTime;
 
@@ -21,7 +21,7 @@ public class PlayerFire : MonoBehaviour
     private void Start()
     {
         _objectName = gameObject.name;
-        _originCoolTime = _coolTime;
+        _originCoolTime = CoolTime;
     }
 
     // - 생성 위치(총구)
@@ -82,7 +82,7 @@ public class PlayerFire : MonoBehaviour
             }
 
             _coolDown = true;
-            _coolTime = _originCoolTime;
+            CoolTime = _originCoolTime;
         }
     }
 
@@ -91,10 +91,10 @@ public class PlayerFire : MonoBehaviour
         // 쿨타임 이라면
         if (_coolDown)
         {
-            _coolTime -= Time.deltaTime;
+            CoolTime -= Time.deltaTime;
         }
 
-        if (_coolTime <= 0)
+        if (CoolTime <= 0)
         {
             _coolDown = false;
         }
