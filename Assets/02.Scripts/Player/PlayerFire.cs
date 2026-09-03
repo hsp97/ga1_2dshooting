@@ -11,32 +11,33 @@ public class PlayerFire : MonoBehaviour
 
     public Transform FirePointTransform;
 
-    public float CoolTime;
-    private bool CoolDown = false;
-    private float OriginCoolTime;
+    public float _coolTime;
+    private bool _coolDown = false;
+    private float _originCoolTime;
 
-    private bool AutoMode = false;
-    private string ObjectName;
+    private bool _autoMode = false;
+    private string _objectName;
+
     private void Start()
     {
-        ObjectName = gameObject.name;
-        OriginCoolTime = CoolTime;
+        _objectName = gameObject.name;
+        _originCoolTime = _coolTime;
     }
 
     // - 생성 위치(총구)
     private void Update()
     {
-        if (CoolDown)
+        if (_coolDown)
         {
             CheckCoolTime();
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            AutoMode = !AutoMode;
+            _autoMode = !_autoMode;
         }
 
-        if (AutoMode)
+        if (_autoMode)
         {
             Fire();
         }
@@ -52,7 +53,7 @@ public class PlayerFire : MonoBehaviour
 
     private void Fire()
     {
-        if (!CoolDown)
+        if (!_coolDown)
         {
             // 2. 총알 프리팹을 생성한다.
             // Instantiate 는 프리팹을 복사해서 (Monobehaviour를 상속받는) 게임 오브젝트를 생성하고 씬에 넣어주는 기능
@@ -60,37 +61,42 @@ public class PlayerFire : MonoBehaviour
             GameObject subBullet = Instantiate(SubBulletPrefab);
 
             bullet.transform.position = FirePointTransform.position;
-            switch (ObjectName)
+            switch (_objectName)
             {
                 case "FireLeftPoint":
-                {
-                    subBullet.transform.position = new Vector3(FirePointTransform.position.x - 0.05f, FirePointTransform.position.y-0.05f, FirePointTransform.position.z);
-                    break;
-                }
+                    {
+                        subBullet.transform.position = new Vector3(
+                            FirePointTransform.position.x - 0.05f,
+                            FirePointTransform.position.y - 0.05f,
+                            FirePointTransform.position.z);
+                        break;
+                    }
                 case "FireRightPoint":
-                {
-                    subBullet.transform.position = new Vector3(FirePointTransform.position.x + 0.05f, FirePointTransform.position.y-0.05f, FirePointTransform.position.z);
-                    break;
-                }
+                    {
+                        subBullet.transform.position = new Vector3(
+                            FirePointTransform.position.x + 0.05f,
+                            FirePointTransform.position.y - 0.05f,
+                            FirePointTransform.position.z);
+                        break;
+                    }
             }
-            
-            CoolDown = true;
-            CoolTime = OriginCoolTime;
+
+            _coolDown = true;
+            _coolTime = _originCoolTime;
         }
     }
 
     private void CheckCoolTime()
     {
         // 쿨타임 이라면
-        if (CoolDown)
+        if (_coolDown)
         {
-            CoolTime -= Time.deltaTime;
+            _coolTime -= Time.deltaTime;
         }
 
-        if (CoolTime <= 0)
+        if (_coolTime <= 0)
         {
-            CoolDown = false;
+            _coolDown = false;
         }
-        
     }
 }
