@@ -4,16 +4,17 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     public GameObject Player;
-    public float Health;
+    [SerializeField]
+    private float _health;
     public void CalculateHealth(float damge)
     {
-        if (Health <= 0)
+        if (_health <= 0)
         {
             Destroy(this.gameObject);
         }
         else
         {
-            Health -= damge;
+            _health -= damge;
         }
     }
 }

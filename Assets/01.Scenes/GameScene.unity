@@ -549,6 +549,14 @@ PrefabInstance:
       value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 2469543485237020252, guid: 13f652eb6d5db1d4fb7659866682b7b8, type: 3}
+      propertyPath: Player
+      value: 
+      objectReference: {fileID: 1267902991}
+    - target: {fileID: 2469543485237020252, guid: 13f652eb6d5db1d4fb7659866682b7b8, type: 3}
+      propertyPath: _health
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 2469543485237020252, guid: 13f652eb6d5db1d4fb7659866682b7b8, type: 3}
       propertyPath: MoveSpeed
       value: 5
       objectReference: {fileID: 0}
@@ -809,6 +817,14 @@ PrefabInstance:
       value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 2469543485237020252, guid: 13f652eb6d5db1d4fb7659866682b7b8, type: 3}
+      propertyPath: Player
+      value: 
+      objectReference: {fileID: 1267902991}
+    - target: {fileID: 2469543485237020252, guid: 13f652eb6d5db1d4fb7659866682b7b8, type: 3}
+      propertyPath: _health
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 2469543485237020252, guid: 13f652eb6d5db1d4fb7659866682b7b8, type: 3}
       propertyPath: MoveSpeed
       value: 3
       objectReference: {fileID: 0}
@@ -877,6 +893,14 @@ PrefabInstance:
     - target: {fileID: 2469543485237020252, guid: 13f652eb6d5db1d4fb7659866682b7b8, type: 3}
       propertyPath: Health
       value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 2469543485237020252, guid: 13f652eb6d5db1d4fb7659866682b7b8, type: 3}
+      propertyPath: Player
+      value: 
+      objectReference: {fileID: 1267902991}
+    - target: {fileID: 2469543485237020252, guid: 13f652eb6d5db1d4fb7659866682b7b8, type: 3}
+      propertyPath: _health
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 2469543485237020252, guid: 13f652eb6d5db1d4fb7659866682b7b8, type: 3}
       propertyPath: MoveSpeed
