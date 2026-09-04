@@ -18,6 +18,7 @@ public class HomingMove : Enemy
     }
     protected override void Move()
     {
+        if (_player is null) return;
         _direction = _player.transform.position - transform.position;
         Vector2 normalizedSpeed = _direction.normalized * _moveSpeed;
         transform.Translate(normalizedSpeed * Time.deltaTime);

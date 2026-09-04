@@ -20,6 +20,7 @@ public class AimedEnemy : Enemy
     }
     protected override void Move()
     {
+        if (_player is null) return;
         Vector2 normalizedSpeed = _direction.normalized * _moveSpeed;
         transform.Translate(normalizedSpeed * Time.deltaTime);
     }
