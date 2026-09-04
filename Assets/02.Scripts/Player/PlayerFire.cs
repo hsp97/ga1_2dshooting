@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class PlayerFire : Player
+public class PlayerFire : MonoBehaviour
 {
     // 목표: 스페이스바를 누를 때 마다 총알을 생성해서 발사하고 싶다.
     // 필요 속성

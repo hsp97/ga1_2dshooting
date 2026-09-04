@@ -17,13 +17,10 @@ public abstract class Enemy : MonoBehaviour
 
     public void CalculateHealth(float damage)
     {
+        _health -= damage;
         if (_health <= 0)
         {
             Destroy(this.gameObject);
-        }
-        else
-        {
-            _health -= damage;
         }
     }
     public float GetDamage()

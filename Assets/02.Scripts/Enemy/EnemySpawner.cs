@@ -11,22 +11,22 @@ enum EnemyType
 public class EnemySpawner : MonoBehaviour
 {
     // 필요 속성
-    [Header("스폰 간격")][SerializeField] private float _spawnInteval = 3;
+    [Header("스폰 간격")][SerializeField] private float _spawnInterval = 3;
     private float _timer = 0;
     [Header("스폰할 프리팹")]
-    [SerializeField] public Enemy _aimEnemyPrefab;
-    [SerializeField] public Enemy _downwardEnemyPrefab;
-    [SerializeField] public Enemy _homingEnemyPrefab;
+    [SerializeField] public Enemy AimEnemyPrefab;
+    [SerializeField] public Enemy DownwardEnemyPrefab;
+    [SerializeField] public Enemy HomingEnemyPrefab;
 
     private float _random = 0f;
     private void Update()
     {
         _timer += Time.deltaTime;
-        if (_timer >= _spawnInteval)
+        if (_timer >= _spawnInterval)
         {
             _timer = 0;
-            _spawnInteval = UnityEngine.Random.Range(1f, 3f);   // float 1~3 랜덤
-            int randomInt = UnityEngine.Random.Range(1, 2);   // int 1~2 랜덤
+            _spawnInterval = UnityEngine.Random.Range(1f, 3f);   // float 1~3 랜덤
+            // int randomInt = UnityEngine.Random.Range(1, 2);   // int 1~2 랜덤
             Spawn();
         }
     }
@@ -39,17 +39,17 @@ public class EnemySpawner : MonoBehaviour
         {
             case EnemyType.homing:
                 {
-                    enemy = Instantiate(_homingEnemyPrefab);
+                    enemy = Instantiate(HomingEnemyPrefab);
                     break;
                 }
             case EnemyType.aim:
                 {
-                    enemy = Instantiate(_aimEnemyPrefab);
+                    enemy = Instantiate(AimEnemyPrefab);
                     break;
                 }
             case EnemyType.downward:
                 {
-                    enemy = Instantiate(_downwardEnemyPrefab);
+                    enemy = Instantiate(DownwardEnemyPrefab);
                     break;
                 }
         }

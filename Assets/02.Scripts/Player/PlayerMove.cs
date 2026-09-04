@@ -7,7 +7,7 @@ using static System.Math;
 using Debug = UnityEngine.Debug;
 using Object = System.Object;
 
-public class PlayerMove : Player
+public class PlayerMove : MonoBehaviour
 {
     // 목적 : 키보드 입력에 따라서 플레이어 이동 처리를 하고 싶다.
 

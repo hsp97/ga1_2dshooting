@@ -743,6 +743,7 @@ GameObject:
   - component: {fileID: 1267902992}
   - component: {fileID: 1267902996}
   - component: {fileID: 1267902995}
+  - component: {fileID: 1267902997}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -762,7 +763,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6428ee8df660be40ac51831a383f71a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMove
-  _health: 100
   Speed: 5
   MaxPositionY: 0
   MinPositionY: -4.75
@@ -921,6 +921,19 @@ PolygonCollider2D:
       - {x: -0.5, y: -0.28866667}
       - {x: 0.5, y: -0.28866667}
   m_UseDelaunayMesh: 1
+--- !u!114 &1267902997
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1267902991}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 073ccc458b9bc00428da3ed49822f6b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Player
+  _health: 100
 --- !u!1 &1831259772
 GameObject:
   m_ObjectHideFlags: 0

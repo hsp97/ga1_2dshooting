@@ -1,20 +1,17 @@
 using System;
 using UnityEngine;
 
-public abstract class Player : MonoBehaviour
+public class Player : MonoBehaviour
 {
     [SerializeField]
     protected float _health;
 
     public void CalculateHealth(float damge)
     {
+        _health -= damge;
         if (_health <= 0)
         {
             Destroy(this.gameObject);
-        }
-        else
-        {
-            _health -= damge;
         }
     }
 
