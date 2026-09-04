@@ -14,11 +14,9 @@ public class EnemySpawner : MonoBehaviour
     [Header("스폰 간격")][SerializeField] private float _spawnInterval = 3;
     private float _timer = 0;
     [Header("스폰할 프리팹")]
-    [SerializeField] public Enemy AimEnemyPrefab;
-    [SerializeField] public Enemy DownwardEnemyPrefab;
-    [SerializeField] public Enemy HomingEnemyPrefab;
-
-    private float _random = 0f;
+    [SerializeField]
+    private Enemy[] _enemyPrefabs;
+    private float _random = 0;
     private void Update()
     {
         _timer += Time.deltaTime;
@@ -39,17 +37,17 @@ public class EnemySpawner : MonoBehaviour
         {
             case EnemyType.homing:
                 {
-                    enemy = Instantiate(HomingEnemyPrefab);
+                    enemy = Instantiate(_enemyPrefabs[(int)EnemyType.homing]);
                     break;
                 }
             case EnemyType.aim:
                 {
-                    enemy = Instantiate(AimEnemyPrefab);
+                    enemy = Instantiate(_enemyPrefabs[(int)EnemyType.aim]);
                     break;
                 }
             case EnemyType.downward:
                 {
-                    enemy = Instantiate(DownwardEnemyPrefab);
+                    enemy = Instantiate(_enemyPrefabs[(int)EnemyType.downward]);
                     break;
                 }
         }
@@ -62,9 +60,12 @@ public class EnemySpawner : MonoBehaviour
 
     private EnemyType CalculateRandom()
     {
-        _random = UnityEngine.Random.Range(0f, 100f);
+        _random = UnityEngine.Random.Range(0, 100);
 
-        if (_random is <= 100f and >= 80)
+        // TODO: SO 를 사용해서 리펙토링
+        // 이유1 : 배열을 사용했지만 각 아이템이 어떤 프리팹인지 알수가 없음
+        // 이유2 : 각 Enemy 스폰 확률을 매직넘버로 하드코딩해서 유지보수가 어렵
+        if (_random >= 80)
         {
             return EnemyType.homing;
         }
