@@ -12,13 +12,15 @@ public class AimedEnemy : Enemy
         if (_player == null)
         {
             Debug.LogError("No player found");
+            return;
         }
         _direction = _player.transform.position - transform.position;
+
+        transform.eulerAngles = new Vector3(0f, _direction.y * Time.deltaTime, transform.rotation.z);
     }
     protected override void Move()
     {
         Vector2 normalizedSpeed = _direction.normalized * _moveSpeed;
         transform.Translate(normalizedSpeed * Time.deltaTime);
-        transform.Rotate(0f, 0f, _direction.x * Time.deltaTime);
     }
 }

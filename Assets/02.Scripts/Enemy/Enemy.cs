@@ -5,7 +5,6 @@ public abstract class Enemy : MonoBehaviour
 {
     [SerializeField]
     protected float _health;
-
     private void Update()
     {
         Move();
@@ -13,7 +12,7 @@ public abstract class Enemy : MonoBehaviour
 
     protected abstract void Move();
 
-    public void CalculateHealth(float damge)
+    public void CalculateHealth(float damage)
     {
         if (_health <= 0)
         {
@@ -21,7 +20,7 @@ public abstract class Enemy : MonoBehaviour
         }
         else
         {
-            _health -= damge;
+            _health -= damage;
         }
     }
 }
