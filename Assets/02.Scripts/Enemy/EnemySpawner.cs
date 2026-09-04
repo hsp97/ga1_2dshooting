@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 // 역할 : 일정 시간마다 적을 생성해준다.
@@ -14,6 +13,8 @@ public class EnemySpawner : MonoBehaviour
         if (_timer >= _spawnInteval)
         {
             _timer = 0;
+            _spawnInteval = UnityEngine.Random.Range(1f, 3f);   // float 1~3 랜덤
+            int randomInt = UnityEngine.Random.Range(1, 2);   // int 1~2 랜덤
             Spawn();
         }
     }
