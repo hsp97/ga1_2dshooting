@@ -23,8 +23,13 @@ public abstract class Enemy : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
-    public float GetDamage()
+    private void OnTriggerEnter2D(Collider2D collider)
     {
-        return _damage;
+        if (collider.gameObject.CompareTag("Player"))
+        {
+            Player player = collider.gameObject.GetComponent<Player>();
+            player.CalculateHealth(_damage);
+            Destroy(this.gameObject);
+        }
     }
 }

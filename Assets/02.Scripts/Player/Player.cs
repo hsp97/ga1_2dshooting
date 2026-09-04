@@ -14,14 +14,4 @@ public class Player : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
-
-    private void OnTriggerEnter2D(Collider2D collider)
-    {
-        if (collider.gameObject.CompareTag("Enemy"))
-        {
-            Enemy enemy = collider.gameObject.GetComponent<Enemy>();
-            CalculateHealth(enemy.GetDamage());
-            Destroy(collider.gameObject);
-        }
-    }
 }

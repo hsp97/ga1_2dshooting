@@ -255,7 +255,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5058537866554621810, guid: 6089deb2093e58c4f93ea65123b8e3b5, type: 3}
       propertyPath: CoolTime
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 5058537866554621810, guid: 6089deb2093e58c4f93ea65123b8e3b5, type: 3}
       propertyPath: SubBulletPrefab
@@ -333,7 +333,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5058537866554621810, guid: 6089deb2093e58c4f93ea65123b8e3b5, type: 3}
       propertyPath: CoolTime
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 5058537866554621810, guid: 6089deb2093e58c4f93ea65123b8e3b5, type: 3}
       propertyPath: SubBulletPrefab
