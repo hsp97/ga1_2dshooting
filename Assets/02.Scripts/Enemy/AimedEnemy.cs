@@ -19,5 +19,6 @@ public class AimedEnemy : Enemy
     {
         Vector2 normalizedSpeed = _direction.normalized * _moveSpeed;
         transform.Translate(normalizedSpeed * Time.deltaTime);
+        transform.Rotate(0f, 0f, _direction.x * Time.deltaTime);
     }
 }
