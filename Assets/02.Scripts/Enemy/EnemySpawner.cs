@@ -1,12 +1,24 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
+enum EnemyType
+{
+    aim,
+    downward,
+    homing,
+}
 // 역할 : 일정 시간마다 적을 생성해준다.
 public class EnemySpawner : MonoBehaviour
 {
     // 필요 속성
     [Header("스폰 간격")][SerializeField] private float _spawnInteval = 3;
     private float _timer = 0;
-    [Header("스폰할 프리팹")][SerializeField] public Enemy _enemyPrefab;
+    [Header("스폰할 프리팹")]
+    [SerializeField] public Enemy _aimEnemyPrefab;
+    [SerializeField] public Enemy _downwardEnemyPrefab;
+    [SerializeField] public Enemy _homingEnemyPrefab;
+
+    private float _random = 0f;
     private void Update()
     {
         _timer += Time.deltaTime;
@@ -20,7 +32,49 @@ public class EnemySpawner : MonoBehaviour
     }
     private void Spawn()
     {
-        Enemy enemy = Instantiate(_enemyPrefab);
-        enemy.transform.position = transform.position;
+        EnemyType enemyType = CalculateRandom();
+
+        Enemy enemy = null;
+        switch (enemyType)
+        {
+            case EnemyType.homing:
+                {
+                    enemy = Instantiate(_homingEnemyPrefab);
+                    break;
+                }
+            case EnemyType.aim:
+                {
+                    enemy = Instantiate(_aimEnemyPrefab);
+                    break;
+                }
+            case EnemyType.downward:
+                {
+                    enemy = Instantiate(_downwardEnemyPrefab);
+                    break;
+                }
+        }
+
+        if (enemy is not null)
+        {
+            enemy.transform.position = transform.position;
+        }
+    }
+
+    private EnemyType CalculateRandom()
+    {
+        _random = UnityEngine.Random.Range(0f, 100f);
+
+        if (_random is <= 100f and >= 80)
+        {
+            return EnemyType.homing;
+        }
+        else if (_random is < 80 and >= 50)
+        {
+            return EnemyType.aim;
+        }
+        else
+        {
+            return EnemyType.downward;
+        }
     }
 }

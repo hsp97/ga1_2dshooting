@@ -5,6 +5,9 @@ public abstract class Enemy : MonoBehaviour
 {
     [SerializeField]
     protected float _health;
+
+    [SerializeField]
+    private float _damage;
     private void Update()
     {
         Move();
@@ -22,5 +25,9 @@ public abstract class Enemy : MonoBehaviour
         {
             _health -= damage;
         }
+    }
+    public float GetDamage()
+    {
+        return _damage;
     }
 }

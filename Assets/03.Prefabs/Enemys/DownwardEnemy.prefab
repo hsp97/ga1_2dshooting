@@ -180,4 +180,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DownwardEnemy
   _health: 200
+  _damage: 20
   _moveSpeed: 1
+  _test: {fileID: 0}

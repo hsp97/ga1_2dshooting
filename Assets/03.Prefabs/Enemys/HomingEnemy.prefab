@@ -180,4 +180,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HomingMove
   _health: 50
+  _damage: 10
   _moveSpeed: 3
