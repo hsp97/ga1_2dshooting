@@ -28,7 +28,10 @@ public abstract class Enemy : MonoBehaviour
         if (collider.gameObject.CompareTag("Player"))
         {
             Player player = collider.gameObject.GetComponent<Player>();
-            player.CalculateHealth(_damage);
+            if (player != null)
+            {
+                player.CalculateHealth(_damage);
+            }
             Destroy(this.gameObject);
         }
     }
