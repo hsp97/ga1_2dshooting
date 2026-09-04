@@ -13,7 +13,6 @@ public class HomingMove : Enemy
         if (_player == null)
         {
             Debug.LogError("No player found");
-            return;
         }
     }
     protected override void Move()
