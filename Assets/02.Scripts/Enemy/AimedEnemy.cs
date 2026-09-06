@@ -1,11 +1,16 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class AimedEnemy : Enemy
 {
-    private GameObject _player;
-    private Vector2 _direction;
     [SerializeField]
     private float _moveSpeed;
+    [SerializeField]
+    private float _angle = 90f;
+
+    private GameObject _player;
+    private Vector3 _direction;
+    
     private void Start()
     {
         _player = GameObject.FindWithTag("Player");
@@ -16,12 +21,14 @@ public class AimedEnemy : Enemy
         }
         _direction = _player.transform.position - transform.position;
 
-        transform.eulerAngles = new Vector3(0f, _direction.y * Time.deltaTime, transform.rotation.z);
+        float angle = Mathf.Atan2(_direction.y, _direction.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(0,0, angle - _angle);
     }
     protected override void Move()
     {
         if (!_player) return;
-        Vector2 normalizedSpeed = _direction.normalized * _moveSpeed;
-        transform.Translate(normalizedSpeed * Time.deltaTime);
+        Vector3 normalizedSpeed = _direction.normalized * _moveSpeed;
+
+        transform.position = transform.position + normalizedSpeed * Time.deltaTime;
     }
 }
