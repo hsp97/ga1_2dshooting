@@ -13,7 +13,7 @@ public class PlayerFire : MonoBehaviour
 
     public float CoolTime;
     private bool _coolDown = false;
-    private float _originCoolTime;
+    public float _originCoolTime;
 
     private bool _autoMode = false;
     private string _objectName;

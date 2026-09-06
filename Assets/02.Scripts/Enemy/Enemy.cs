@@ -8,6 +8,9 @@ public abstract class Enemy : MonoBehaviour
 
     [SerializeField]
     private float _damage;
+
+    [SerializeField]
+    private GameObject Item;
     private void Update()
     {
         Move();
@@ -21,6 +24,13 @@ public abstract class Enemy : MonoBehaviour
         if (_health <= 0)
         {
             Destroy(this.gameObject);
+
+
+            int value = UnityEngine.Random.Range(1, 10);
+            if (value > 6) 
+            {
+                Instantiate(Item);
+            }
         }
     }
 

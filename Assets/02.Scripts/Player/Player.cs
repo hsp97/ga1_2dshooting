@@ -14,4 +14,19 @@ public class Player : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
+
+    public void AddAttackSpeedBuff()
+    {
+        
+    }
+    public void AddMoveSpeedBuff()
+    {
+        PlayerMove playerMove = GetComponent<PlayerMove>();
+        playerMove.Speed += 5f;
+        
+    }
+    public void HealHp()
+    {
+        _health += 50;
+    }
 }

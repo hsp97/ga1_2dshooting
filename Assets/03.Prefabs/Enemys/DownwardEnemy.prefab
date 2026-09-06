@@ -181,5 +181,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DownwardEnemy
   _health: 200
   _damage: 20
+  Item: {fileID: 6791340804867136192, guid: 102a92c097687bd4d82e616b01eb0634, type: 3}
   _moveSpeed: 1
   _angle: 90

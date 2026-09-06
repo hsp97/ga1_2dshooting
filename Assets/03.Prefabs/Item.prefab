@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6457414472135444935}
   - component: {fileID: 4613455950197732836}
   - component: {fileID: 5300423305309511497}
+  - component: {fileID: 8596680242942350165}
   m_Layer: 0
   m_Name: Item
   m_TagString: Untagged
@@ -104,3 +105,40 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2ac93bd52e3f5a498e197a2f23fd5e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Item
+  _maxTime: 3
+--- !u!58 &8596680242942350165
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6791340804867136192}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_Radius: 0.5

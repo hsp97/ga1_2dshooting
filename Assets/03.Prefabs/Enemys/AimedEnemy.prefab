@@ -181,5 +181,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AimedEnemy
   _health: 100
   _damage: 30
+  Item: {fileID: 6791340804867136192, guid: 102a92c097687bd4d82e616b01eb0634, type: 3}
   _moveSpeed: 2
   _angle: 90

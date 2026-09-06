@@ -181,5 +181,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::HomingMove
   _health: 50
   _damage: 10
+  Item: {fileID: 6791340804867136192, guid: 102a92c097687bd4d82e616b01eb0634, type: 3}
   _moveSpeed: 3
   _angle: 90
