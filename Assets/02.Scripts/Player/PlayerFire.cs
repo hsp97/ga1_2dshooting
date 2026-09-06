@@ -99,4 +99,9 @@ public class PlayerFire : MonoBehaviour
             _coolDown = false;
         }
     }
+
+    public void AddAttackSpeed(float value)
+    {
+        _originCoolTime -= _originCoolTime * value;
+    }
 }

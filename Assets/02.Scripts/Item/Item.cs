@@ -11,6 +11,8 @@ public class Item : MonoBehaviour
 {
     [SerializeField]
     private float _maxTime = 3;
+    [SerializeField]
+    private float _attackSpeedBuff = 0.1f;
 
     private GameObject _player;
     private float _timer = 0;
@@ -80,7 +82,7 @@ public class Item : MonoBehaviour
                     }
                 case ItemType.attackSpeed:
                     {
-                        collision.gameObject.GetComponent<Player>().AddAttackSpeedBuff();
+                        collision.gameObject.GetComponent<Player>().AddAttackSpeedBuff(_attackSpeedBuff);
                         break;
                     }
                 case ItemType.moveSpeed:

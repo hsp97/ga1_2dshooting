@@ -29,7 +29,8 @@ public abstract class Enemy : MonoBehaviour
             int value = UnityEngine.Random.Range(1, 10);
             if (value > 6) 
             {
-                Instantiate(Item);
+                
+                Instantiate(Item, transform.position, Quaternion.identity);
             }
         }
     }
