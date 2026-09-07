@@ -10,7 +10,7 @@ public abstract class Enemy : MonoBehaviour
     private float _damage;
 
     [SerializeField]
-    private GameObject Item;
+    private GameObject _item;
     private void Update()
     {
         Move();
@@ -25,12 +25,10 @@ public abstract class Enemy : MonoBehaviour
         {
             Destroy(this.gameObject);
 
-
             int value = UnityEngine.Random.Range(1, 10);
-            if (value > 6) 
+            if (value > 6)
             {
-                
-                Instantiate(Item, transform.position, Quaternion.identity);
+                Instantiate(_item, transform.position, Quaternion.identity);
             }
         }
     }

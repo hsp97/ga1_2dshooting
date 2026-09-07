@@ -106,6 +106,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Item
   _maxTime: 3
+  _attackSpeedBuff: 0.1
 --- !u!58 &8596680242942350165
 CircleCollider2D:
   m_ObjectHideFlags: 0

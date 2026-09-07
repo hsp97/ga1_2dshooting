@@ -10,7 +10,6 @@ public class AimedEnemy : Enemy
 
     private GameObject _player;
     private Vector3 _direction;
-    
     private void Start()
     {
         _player = GameObject.FindWithTag("Player");
@@ -22,7 +21,7 @@ public class AimedEnemy : Enemy
         _direction = _player.transform.position - transform.position;
 
         float angle = Mathf.Atan2(_direction.y, _direction.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(0,0, angle - _angle);
+        transform.rotation = Quaternion.Euler(0, 0, angle - _angle);
     }
     protected override void Move()
     {

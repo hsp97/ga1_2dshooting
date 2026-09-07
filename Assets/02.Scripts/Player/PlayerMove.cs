@@ -12,7 +12,8 @@ public class PlayerMove : MonoBehaviour
     // 목적 : 키보드 입력에 따라서 플레이어 이동 처리를 하고 싶다.
 
     // 필요 필드:
-    public float Speed;
+    [SerializeField]
+    private float _speed;
 
     public float MaxPositionY;
     public float MinPositionY;
@@ -93,6 +94,16 @@ public class PlayerMove : MonoBehaviour
         Move(_h, _v, mutiply);
     }
 
+    public void SpeedUpBuff(float upValue)
+    {
+        if (upValue < 0)
+        {
+            Debug.LogWarning("속도 증가량은 0보다 작을수 없습니다.");
+            return;
+        }
+
+        _speed += upValue;
+    }
     private void Move(float h, float v, string mutiply)
     {
         if (transform.position.x < MinPositornX)
@@ -122,7 +133,7 @@ public class PlayerMove : MonoBehaviour
             normalizedDirection /= 2;
         }
 
-        transform.Translate(normalizedDirection * Speed * Time.deltaTime);
+        transform.Translate(normalizedDirection * _speed * Time.deltaTime);
 
         var positionY = transform.position;
         positionY.y = Math.Clamp(transform.position.y, MinPositionY, MaxPositionY);
@@ -171,25 +182,25 @@ public class PlayerMove : MonoBehaviour
         {
             case "left":
                 {
-                    h = h + (-1) * Speed * Time.deltaTime;
+                    h = h + (-1) * _speed * Time.deltaTime;
                     Move(h, v, multiply);
                     break;
                 }
             case "right":
                 {
-                    h = h + (1) * Speed * Time.deltaTime;
+                    h = h + (1) * _speed * Time.deltaTime;
                     Move(h, v, multiply);
                     break;
                 }
             case "up":
                 {
-                    v = v + (1) * Speed * Time.deltaTime;
+                    v = v + (1) * _speed * Time.deltaTime;
                     Move(h, v, multiply);
                     break;
                 }
             case "down":
                 {
-                    v = v + (-1) * Speed * Time.deltaTime;
+                    v = v + (-1) * _speed * Time.deltaTime;
                     Move(h, v, multiply);
                     break;
                 }

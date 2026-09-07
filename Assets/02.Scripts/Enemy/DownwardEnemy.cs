@@ -13,7 +13,7 @@ public class DownwardEnemy : Enemy
 
         float angle = Mathf.Atan2(_direction.y, _direction.x) * Mathf.Rad2Deg;
 
-        transform.rotation = Quaternion.Euler(0,0, angle - _angle);
+        transform.rotation = Quaternion.Euler(0, 0, angle - _angle);
 
         transform.position = transform.position + normalizedSpeed * Time.deltaTime;
     }

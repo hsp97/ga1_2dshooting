@@ -1,12 +1,6 @@
 using UnityEngine;
 using static UnityEngine.Rendering.DebugUI;
 
-enum ItemType
-{
-    heal,
-    attackSpeed,
-    moveSpeed
-}
 public class Item : MonoBehaviour
 {
     [SerializeField]
@@ -46,19 +40,13 @@ public class Item : MonoBehaviour
         }
 
         _player = GameObject.FindWithTag("Player");
-        if( _player == null)
-        {
-            return;
-        }
+        //if (_player ==null) return;
     }
 
     void Update()
     {
         _timer += Time.deltaTime;
-        if( _timer > _maxTime)
-        {
-            Move();
-        }
+        if (_timer > _maxTime) Move();
     }
 
     private void Move()

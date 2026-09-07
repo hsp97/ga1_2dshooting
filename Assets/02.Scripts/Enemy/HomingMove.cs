@@ -6,10 +6,8 @@ public class HomingMove : Enemy
     private float _moveSpeed;
     [SerializeField]
     private float _angle = 180f;
-
     // 캐싱 기법
     private GameObject _player;
-    
     private void Start()
     {
         _player = GameObject.FindWithTag("Player");
