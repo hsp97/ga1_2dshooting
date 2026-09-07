@@ -10,6 +10,7 @@ public class AimedEnemy : Enemy
 
     private GameObject _player;
     private Vector3 _direction;
+
     private void Start()
     {
         _player = GameObject.FindWithTag("Player");

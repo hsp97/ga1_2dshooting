@@ -11,6 +11,8 @@ public abstract class Enemy : MonoBehaviour
 
     [SerializeField]
     private GameObject _item;
+    [SerializeField]
+    protected Animator _animator;
     private void Update()
     {
         Move();
@@ -21,6 +23,7 @@ public abstract class Enemy : MonoBehaviour
     public void CalculateHealth(float damage)
     {
         _health -= damage;
+        _animator.SetTrigger("hit");
         if (_health <= 0)
         {
             int value = UnityEngine.Random.Range(1, 101);
@@ -33,6 +36,7 @@ public abstract class Enemy : MonoBehaviour
             }
             Destroy(this.gameObject);
         }
+        _animator.SetTrigger("idle");
     }
 
     private void OnTriggerEnter2D(Collider2D collider)
