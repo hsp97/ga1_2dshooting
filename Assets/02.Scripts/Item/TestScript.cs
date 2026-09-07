@@ -17,8 +17,8 @@ public class TestScript : MonoBehaviour
     private void Update()
     {
         _time += Time.deltaTime;
-        Vector3 p4 = Vector3.Lerp(_p1, _p2, _time / 1000);
-        Vector3 p5 = Vector3.Lerp(_p2, _p3, _time / 1000);
-        transform.position = Vector3.Lerp(p4, p5, _time / 1000);
+        Vector3 p4 = Vector3.Lerp(_p1, _p2, _time / 10);
+        Vector3 p5 = Vector3.Lerp(_p2, _p3, _time / 10);
+        transform.position = Vector3.Lerp(p4, p5, _time / 10);
     }
 }
