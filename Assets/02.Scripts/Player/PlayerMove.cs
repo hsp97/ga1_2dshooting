@@ -12,6 +12,7 @@ public class PlayerMove : MonoBehaviour
     // 목적 : 키보드 입력에 따라서 플레이어 이동 처리를 하고 싶다.
 
     // 필요 필드:
+    private Animator _animator;
     [SerializeField] private float _speed;
 
     public float MaxPositionY;
@@ -25,6 +26,13 @@ public class PlayerMove : MonoBehaviour
     private float _h = 0f;
     private float _v = 0f;
     private Vector3 _startPosition;
+
+    // 객체가 생성 될 때 한 번 실행된다.
+    private void Awake()
+    {
+        // 애니메이터 컴포넌트에 대한 참조를 가져온다.
+        _animator = GetComponent<Animator>();
+    }
 
     void Start()
     {
@@ -47,7 +55,6 @@ public class PlayerMove : MonoBehaviour
         string mutiply = "";
         // float h = Input.GetAxisRaw("Horizontal");   //곧바로 -1 0 1 반환
         // float v = Input.GetAxisRaw("Vertical");   //곧바로 -1 0 1 반환
-
 
         // 2. 키보드 입력에 따라 방향을 구한다.
         // 3. 방향과 속도에 따라 이동한다.
@@ -123,6 +130,7 @@ public class PlayerMove : MonoBehaviour
         // 대각선이 더 빠른것을 보간작업
         Vector2 normalizedDirection = direction.normalized; // 벡터의 길이를 1로 만들어주는것 (즉, 방향만 유지)
 
+        _animator.SetInteger("x", (int)normalizedDirection.x);
         if (mutiply == "speedUp")
         {
             normalizedDirection *= 2;
