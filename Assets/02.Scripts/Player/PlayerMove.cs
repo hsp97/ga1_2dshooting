@@ -12,8 +12,7 @@ public class PlayerMove : MonoBehaviour
     // 목적 : 키보드 입력에 따라서 플레이어 이동 처리를 하고 싶다.
 
     // 필요 필드:
-    [SerializeField]
-    private float _speed;
+    [SerializeField] private float _speed;
 
     public float MaxPositionY;
     public float MinPositionY;
@@ -58,17 +57,17 @@ public class PlayerMove : MonoBehaviour
             switch (_commandList[0])
             {
                 case "speedUp":
-                    {
-                        multiply = "speedUp";
-                        _commandList.RemoveAt(0);
-                        break;
-                    }
+                {
+                    multiply = "speedUp";
+                    _commandList.RemoveAt(0);
+                    break;
+                }
                 case "speedDown":
-                    {
-                        multiply = "speedDown";
-                        _commandList.RemoveAt(0);
-                        break;
-                    }
+                {
+                    multiply = "speedDown";
+                    _commandList.RemoveAt(0);
+                    break;
+                }
             }
 
             ExcuteReplay(multiply);
@@ -104,6 +103,7 @@ public class PlayerMove : MonoBehaviour
 
         _speed += upValue;
     }
+
     private void Move(float h, float v, string mutiply)
     {
         if (transform.position.x < MinPositornX)
@@ -181,29 +181,29 @@ public class PlayerMove : MonoBehaviour
         switch (_commandList[0])
         {
             case "left":
-                {
-                    h = h + (-1) * _speed * Time.deltaTime;
-                    Move(h, v, multiply);
-                    break;
-                }
+            {
+                h = h + (-1) * _speed * Time.deltaTime;
+                Move(h, v, multiply);
+                break;
+            }
             case "right":
-                {
-                    h = h + (1) * _speed * Time.deltaTime;
-                    Move(h, v, multiply);
-                    break;
-                }
+            {
+                h = h + (1) * _speed * Time.deltaTime;
+                Move(h, v, multiply);
+                break;
+            }
             case "up":
-                {
-                    v = v + (1) * _speed * Time.deltaTime;
-                    Move(h, v, multiply);
-                    break;
-                }
+            {
+                v = v + (1) * _speed * Time.deltaTime;
+                Move(h, v, multiply);
+                break;
+            }
             case "down":
-                {
-                    v = v + (-1) * _speed * Time.deltaTime;
-                    Move(h, v, multiply);
-                    break;
-                }
+            {
+                v = v + (-1) * _speed * Time.deltaTime;
+                Move(h, v, multiply);
+                break;
+            }
         }
 
         _commandList.RemoveAt(0);

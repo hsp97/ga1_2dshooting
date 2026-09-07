@@ -3,16 +3,15 @@ using static UnityEngine.Rendering.DebugUI;
 
 public class Item : MonoBehaviour
 {
-    [SerializeField]
-    private float _maxTime = 3;
-    [SerializeField]
-    private float _attackSpeedBuff = 0.1f;
+    [SerializeField] private float _waitTime = 3;
+    [SerializeField] private float _attackSpeedBuff = 0.1f;
 
     private GameObject _player;
     private float _timer = 0;
     private float _moveSpeed = 10f;
     private float _random;
     private ItemType _itemType;
+
     void Start()
     {
         _random = UnityEngine.Random.Range(0, 100);
@@ -23,20 +22,20 @@ public class Item : MonoBehaviour
         switch (_itemType)
         {
             case ItemType.heal:
-                {
-                    spriteRenderer.color = Color.green;
-                    break;
-                }
+            {
+                spriteRenderer.color = Color.green;
+                break;
+            }
             case ItemType.attackSpeed:
-                {
-                    spriteRenderer.color = Color.blue;
-                    break;
-                }
+            {
+                spriteRenderer.color = Color.blue;
+                break;
+            }
             case ItemType.moveSpeed:
-                {
-                    spriteRenderer.color = Color.white;
-                    break;
-                }
+            {
+                spriteRenderer.color = Color.white;
+                break;
+            }
         }
 
         _player = GameObject.FindWithTag("Player");
@@ -46,7 +45,10 @@ public class Item : MonoBehaviour
     void Update()
     {
         _timer += Time.deltaTime;
-        if (_timer > _maxTime) Move();
+        if (_timer > _waitTime)
+        {
+            Move();
+        }
     }
 
     private void Move()
@@ -64,20 +66,20 @@ public class Item : MonoBehaviour
             switch (_itemType)
             {
                 case ItemType.heal:
-                    {
-                        collision.gameObject.GetComponent<Player>().HealHp();
-                        break;
-                    }
+                {
+                    collision.gameObject.GetComponent<Player>().HealHp();
+                    break;
+                }
                 case ItemType.attackSpeed:
-                    {
-                        collision.gameObject.GetComponent<Player>().AddAttackSpeedBuff(_attackSpeedBuff);
-                        break;
-                    }
+                {
+                    collision.gameObject.GetComponent<Player>().AddAttackSpeedBuff(_attackSpeedBuff);
+                    break;
+                }
                 case ItemType.moveSpeed:
-                    {
-                        collision.gameObject.GetComponent<Player>().AddMoveSpeedBuff();
-                        break;
-                    }
+                {
+                    collision.gameObject.GetComponent<Player>().AddMoveSpeedBuff();
+                    break;
+                }
             }
 
             Destroy(this.gameObject);
@@ -101,6 +103,5 @@ public class Item : MonoBehaviour
         {
             return ItemType.moveSpeed;
         }
-
     }
 }

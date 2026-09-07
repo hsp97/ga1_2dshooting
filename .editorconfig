@@ -9,6 +9,17 @@ indent_style = space
 indent_size = 4
 csharp_new_line_before_open_brace = all
 
+#### switch / case 들여쓰기 ####
+# 명시하지 않으면 Roslyn 기본값(true)이 적용되는데,
+# IDE 자동 정렬(특히 Rider)과 안 맞아서 IDE0055 경고가 뜸 → 명시적으로 고정
+csharp_indent_switch_labels = true
+csharp_indent_case_contents = true
+csharp_indent_case_contents_when_block = false
+
+#### Attribute 줄바꿈 ####
+# attribute를 필드 선언과 한 줄에 유지 (Rider 전용 옵션, Roslyn 공식 옵션엔 없음)
+csharp_place_field_attribute_on_same_line = true
+
 # 조기 리턴(단일 행)은 중괄호 없이 허용, 여러 줄일 때만 중괄호 강제
 csharp_prefer_braces = when_multiline:warning
 
@@ -39,7 +50,7 @@ dotnet_naming_rule.private_constants_pascal.severity = warning
 # private static readonly → PascalCase
 dotnet_naming_symbols.private_static_readonly.applicable_kinds = field
 dotnet_naming_symbols.private_static_readonly.applicable_accessibilities = private
-dotnet_naming_symbols.private_static_readonly.required_modifiers = static,readonly
+dotnet_naming_symbols.private_static_readonly.required_modifiers = static, readonly
 dotnet_naming_rule.private_static_readonly_pascal.symbols = private_static_readonly
 dotnet_naming_rule.private_static_readonly_pascal.style = pascal_case
 dotnet_naming_rule.private_static_readonly_pascal.severity = warning

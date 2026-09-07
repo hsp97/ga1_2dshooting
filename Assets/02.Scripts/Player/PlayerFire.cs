@@ -64,21 +64,21 @@ public class PlayerFire : MonoBehaviour
             switch (_objectName)
             {
                 case "FireLeftPoint":
-                    {
-                        subBullet.transform.position = new Vector3(
-                            FirePointTransform.position.x - 0.05f,
-                            FirePointTransform.position.y - 0.05f,
-                            FirePointTransform.position.z);
-                        break;
-                    }
+                {
+                    subBullet.transform.position = new Vector3(
+                        FirePointTransform.position.x - 0.05f,
+                        FirePointTransform.position.y - 0.05f,
+                        FirePointTransform.position.z);
+                    break;
+                }
                 case "FireRightPoint":
-                    {
-                        subBullet.transform.position = new Vector3(
-                            FirePointTransform.position.x + 0.05f,
-                            FirePointTransform.position.y - 0.05f,
-                            FirePointTransform.position.z);
-                        break;
-                    }
+                {
+                    subBullet.transform.position = new Vector3(
+                        FirePointTransform.position.x + 0.05f,
+                        FirePointTransform.position.y - 0.05f,
+                        FirePointTransform.position.z);
+                    break;
+                }
             }
 
             _coolDown = true;

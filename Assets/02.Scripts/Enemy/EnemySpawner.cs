@@ -7,27 +7,30 @@ enum EnemyType
     downward,
     homing,
 }
+
 // 역할 : 일정 시간마다 적을 생성해준다.
 public class EnemySpawner : MonoBehaviour
 {
     // 필요 속성
-    [Header("스폰 간격")][SerializeField] private float _spawnInterval = 3;
+    [Header("스폰 간격")]
+    [SerializeField] private float _spawnInterval = 3;
     private float _timer = 0;
     [Header("스폰할 프리팹")]
-    [SerializeField]
-    private Enemy[] _enemyPrefabs;
+    [SerializeField] private Enemy[] _enemyPrefabs;
     private float _random = 0;
+
     private void Update()
     {
         _timer += Time.deltaTime;
         if (_timer >= _spawnInterval)
         {
             _timer = 0;
-            _spawnInterval = UnityEngine.Random.Range(1f, 3f);   // float 1~3 랜덤
+            _spawnInterval = UnityEngine.Random.Range(1f, 3f); // float 1~3 랜덤
             // int randomInt = UnityEngine.Random.Range(1, 2);   // int 1~2 랜덤
             Spawn();
         }
     }
+
     private void Spawn()
     {
         EnemyType enemyType = CalculateRandom();
@@ -36,20 +39,20 @@ public class EnemySpawner : MonoBehaviour
         switch (enemyType)
         {
             case EnemyType.homing:
-                {
-                    enemy = Instantiate(_enemyPrefabs[(int)EnemyType.homing]);
-                    break;
-                }
+            {
+                enemy = Instantiate(_enemyPrefabs[(int)EnemyType.homing]);
+                break;
+            }
             case EnemyType.aim:
-                {
-                    enemy = Instantiate(_enemyPrefabs[(int)EnemyType.aim]);
-                    break;
-                }
+            {
+                enemy = Instantiate(_enemyPrefabs[(int)EnemyType.aim]);
+                break;
+            }
             case EnemyType.downward:
-                {
-                    enemy = Instantiate(_enemyPrefabs[(int)EnemyType.downward]);
-                    break;
-                }
+            {
+                enemy = Instantiate(_enemyPrefabs[(int)EnemyType.downward]);
+                break;
+            }
         }
 
         if (enemy is not null)
