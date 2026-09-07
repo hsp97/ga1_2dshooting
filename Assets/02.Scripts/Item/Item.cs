@@ -39,7 +39,7 @@ public class Item : MonoBehaviour
         }
 
         _player = GameObject.FindWithTag("Player");
-        //if (_player ==null) return;
+        if (_player == null) return;
     }
 
     void Update()
@@ -65,6 +65,8 @@ public class Item : MonoBehaviour
         {
             switch (_itemType)
             {
+                // 심화과제1: 퍼사드 패턴(패턴: 객체지향에서 자주 일어나는 설계 문제를 잘 풀어내도록 경험에 의해 정리해놓은 공식같은거)
+                // 심화과제2: 아이템 졸류가 폭발적으로 증가할 경우에는 -> 조합 패턴을 사용해라
                 case ItemType.heal:
                 {
                     collision.gameObject.GetComponent<Player>().HealHp();
