@@ -13,6 +13,9 @@ public abstract class Enemy : MonoBehaviour
     private GameObject _item;
     [SerializeField]
     protected Animator _animator;
+
+    // 죽을때 생성할 이펙트 프리팹
+    [SerializeField] private GameObject _deathEffectPrefab;
     private void Update()
     {
         Move();
@@ -34,9 +37,17 @@ public abstract class Enemy : MonoBehaviour
             {
                 Instantiate(_item, transform.position, Quaternion.identity);
             }
+
+            SpawnDeathEffect();
             Destroy(this.gameObject);
         }
         _animator.SetTrigger("idle");
+    }
+
+    private void SpawnDeathEffect()
+    {
+        // Quaternion.identity => 0,0,0 넣어줌(회전 x)
+        Instantiate(_deathEffectPrefab, transform.position, Quaternion.identity);
     }
 
     private void OnTriggerEnter2D(Collider2D collider)
@@ -46,8 +57,9 @@ public abstract class Enemy : MonoBehaviour
             Player player = collider.gameObject.GetComponent<Player>();
             if (player != null)
             {
-                player.CalculateHealth(_damage);
+                player.TakeDamge(_damage);
             }
+
             Destroy(this.gameObject);
         }
     }

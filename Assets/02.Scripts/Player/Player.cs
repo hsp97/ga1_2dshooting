@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    [SerializeField]
+    private Animator _animator;
     // 캡슐화
     // - 데이터 은닉
     // - 메서드를 통한 상태 변경
@@ -29,7 +31,7 @@ public class Player : MonoBehaviour
     {
         _playerFires.AddRange(GetComponentsInChildren<PlayerFire>());
     }
-    public void CalculateHealth(float damage)
+    public void TakeDamge(float damage)
     {
         if (damage < 0)
         {
@@ -39,8 +41,13 @@ public class Player : MonoBehaviour
         _health -= damage;
         if (_health <= 0)
         {
-            Destroy(this.gameObject);
+            _animator.SetTrigger("death");
         }
+    }
+
+    public void Death()
+    {
+        Destroy(this.gameObject);
     }
     public void AddAttackSpeedBuff(float buff)
     {

@@ -184,6 +184,7 @@ MonoBehaviour:
   _damage: 20
   _item: {fileID: 6791340804867136192, guid: 102a92c097687bd4d82e616b01eb0634, type: 3}
   _animator: {fileID: 3381591646927755993}
+  _deathEffectPrefab: {fileID: 2433282508537954060, guid: 3ef3ae421f71c5c4e97fe12dc2fc6312, type: 3}
   _moveSpeed: 1
   _angle: 90
 --- !u!95 &3381591646927755993

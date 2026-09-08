@@ -69,14 +69,12 @@ public class Item : MonoBehaviour
                 // 심화과제2: 아이템 졸류가 폭발적으로 증가할 경우에는 -> 조합 패턴을 사용해라
                 case ItemType.heal:
                 {
-                    Debug.Log(collision.gameObject.GetComponent<Player>().Health);
                     collision.gameObject.GetComponent<Player>().HealHp();
                     break;
                 }
                 case ItemType.attackSpeed:
                 {
                     collision.gameObject.GetComponent<Player>().AddAttackSpeedBuff(_attackSpeedBuff);
-                    Debug.Log(collision.gameObject.GetComponent<Player>().GetComponent<PlayerFire>().GetCoolTime);
                     break;
                 }
                 case ItemType.moveSpeed:
