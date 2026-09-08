@@ -14,7 +14,8 @@ public class PlayerMove : MonoBehaviour
     // 필요 필드:
     private Animator _animator;
     [SerializeField] private float _speed;
-
+    // 읽기 전용 프로퍼티
+    public float GetSpeed => _speed;
     public float MaxPositionY;
     public float MinPositionY;
     public float MinPositornX;
