@@ -5,6 +5,7 @@ public class Item : MonoBehaviour
 {
     [SerializeField] private float _waitTime = 3;
     [SerializeField] private float _attackSpeedBuff = 0.1f;
+    [SerializeField] private GameObject _getEffectPrefab;
 
     private GameObject _player;
     private float _timer = 0;
@@ -84,6 +85,7 @@ public class Item : MonoBehaviour
                 }
             }
 
+            Instantiate(_getEffectPrefab, transform.position, Quaternion.identity);
             Destroy(this.gameObject);
         }
     }

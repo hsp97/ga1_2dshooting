@@ -1488,6 +1488,7 @@ GameObject:
   - component: {fileID: 1267902995}
   - component: {fileID: 1267902997}
   - component: {fileID: 1267902998}
+  - component: {fileID: 1267902999}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -1703,6 +1704,21 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1267902999
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1267902991}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31239d60812e3a543baf8dc2a08c29c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerBomb
+  _coolTime: 10
+  _player: {fileID: 1267902991}
+  BombPrefab: {fileID: 8184826129453761470, guid: 2e7d7a157d2be2c429fbeb8e8d4adabf, type: 3}
 --- !u!1 &1607629257
 GameObject:
   m_ObjectHideFlags: 0
