@@ -4,13 +4,9 @@ public class BezierMove
 {
     private Transform _target;
     private Vector3 _p1, _p2, _p3;
-    private float _time = 0f;
-    public GameObject P1, P2, P3;
+    private float _time;
     private void Start()
     {
-        _p1 = P1.transform.position;
-        _p2 = P2.transform.position;
-        _p3 = P3.transform.position;
     }
     private void Update()
     {
@@ -22,9 +18,9 @@ public class BezierMove
     private void CalculateMove(GameObject g1, GameObject g2)
     {
         int randomVector = UnityEngine.Random.Range(0, 10);
-        Vector3 p1 = g1.transform.position;
-        Vector3 p2 = g2.transform.position;
-        Vector3 p3 = new Vector3(randomVector, randomVector, randomVector);
+        _p1 = g1.transform.position;
+        _p2 = g2.transform.position;
+        _p3 = new Vector3(randomVector, randomVector, randomVector);
         Vector3 p4 = Vector3.Lerp(_p1, _p2, _time / 10);
         Vector3 p5 = Vector3.Lerp(_p2, _p3, _time / 10);
     }
