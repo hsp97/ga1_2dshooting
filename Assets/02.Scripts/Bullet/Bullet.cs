@@ -3,8 +3,17 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
+    private AudioSource _audioSource;
     public float MoveSpeed;
     public float Damage;
+
+    private void Awake()
+    {
+        _audioSource = GetComponent<AudioSource>();
+        _audioSource.pitch = UnityEngine.Random.Range(-1.5f, 1.5f);
+        _audioSource.Play();
+    }
+
     private void Update()
     {
         Vector2 direction = Vector2.up; // = new Vector2(h, v);
