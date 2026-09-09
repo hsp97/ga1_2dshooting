@@ -20,8 +20,8 @@ public abstract class Enemy : MonoBehaviour
     public void Awake()
     {
         _animator = GetComponent<Animator>();
-        GameObject damgedGameObject = GameObject.Find("DamgedSound");
-        _damgedAudioSource = damgedGameObject.GetComponent<AudioSource>();
+        GameObject damagedGameObject = GameObject.Find("DamagedSound");
+        _damgedAudioSource = damagedGameObject.GetComponent<AudioSource>();
     }
 
     private void Update()

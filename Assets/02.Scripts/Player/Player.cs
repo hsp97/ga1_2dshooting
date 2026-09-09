@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using _02.Scripts;
 using CartoonFX;
@@ -29,6 +30,15 @@ public class Player : MonoBehaviour
     // public float GetHealth() { return _health; }
     private List<PlayerFire> _playerFires = new List<PlayerFire>();
 
+    private AudioSource _playerDamagedAudioSource;
+    private AudioSource _playerDeathAudioSource;
+    public void Awake()
+    {
+        GameObject PlayerSounds = GameObject.Find("PlayerSounds");
+        Sounds sounds = PlayerSounds.GetComponent<Sounds>();
+        _playerDamagedAudioSource = sounds.DamagedPlayerAudioSource;
+        _playerDeathAudioSource = sounds.DeathPlayerAudioSource;
+    }
     public void Start()
     {
         _playerFires.AddRange(GetComponentsInChildren<PlayerFire>());
@@ -43,10 +53,12 @@ public class Player : MonoBehaviour
         _health -= damage;
         if (_health <= 0)
         {
+            _playerDeathAudioSource.Play();
             _animator.SetTrigger("death");
         }
         else
         {
+            _playerDamagedAudioSource.Play();
             _animator.SetTrigger("hurt");
             Cameras.StartShake();
         }
