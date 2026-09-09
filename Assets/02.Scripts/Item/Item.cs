@@ -12,7 +12,6 @@ public class Item : MonoBehaviour
     private float _moveSpeed = 10f;
     private float _random;
     private ItemType _itemType;
-
     void Start()
     {
         _random = UnityEngine.Random.Range(0, 100);
