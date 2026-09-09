@@ -13,15 +13,16 @@ public abstract class Enemy : MonoBehaviour
     private GameObject _item;
     private Animator _animator;
     // Todo: 에너미가 공격당할때 재생시켜주는 피격 사운드 
-    private AudioSource _damgedAudioSource;
+    private AudioSource _enemyDamagedAudioSource;
     // 죽을때 생성할 이펙트 프리팹
     [SerializeField] private GameObject _deathEffectPrefab;
 
     public void Awake()
     {
         _animator = GetComponent<Animator>();
-        GameObject damagedGameObject = GameObject.Find("DamagedSound");
-        _damgedAudioSource = damagedGameObject.GetComponent<AudioSource>();
+        GameObject PlayerSounds = GameObject.Find("Sounds");
+        Sounds sounds = PlayerSounds.GetComponent<Sounds>();
+        _enemyDamagedAudioSource = sounds.DamagedEnemyAudioSource;
     }
 
     private void Update()
@@ -34,7 +35,7 @@ public abstract class Enemy : MonoBehaviour
     {
         _health -= damage;
         _animator.SetTrigger("hit");
-        _damgedAudioSource.Play();
+        _enemyDamagedAudioSource.Play();
         if (_health <= 0)
         {
             int value = UnityEngine.Random.Range(1, 101);

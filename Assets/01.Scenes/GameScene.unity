@@ -847,7 +847,7 @@ GameObject:
   - component: {fileID: 488976712}
   - component: {fileID: 488976713}
   m_Layer: 0
-  m_Name: PlayerSounds
+  m_Name: Sounds
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -868,6 +868,7 @@ Transform:
   m_Children:
   - {fileID: 1506940887}
   - {fileID: 583332110}
+  - {fileID: 1155615090}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &488976713
@@ -882,6 +883,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9462be693e64f654f95175441606e2fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Sounds
+  DamagedEnemyAudioSource: {fileID: 1155615091}
   DamagedPlayerAudioSource: {fileID: 1506940888}
   DeathPlayerAudioSource: {fileID: 583332111}
 --- !u!1 &519420028
@@ -1110,7 +1112,7 @@ GameObject:
   - component: {fileID: 583332110}
   - component: {fileID: 583332111}
   m_Layer: 0
-  m_Name: Death
+  m_Name: PlayerDeath
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1614,7 +1616,7 @@ GameObject:
   - component: {fileID: 1155615090}
   - component: {fileID: 1155615091}
   m_Layer: 0
-  m_Name: DamagedSound
+  m_Name: EnemyDamaged
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1628,12 +1630,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1155615089}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1831259773}
+  m_Father: {fileID: 488976712}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &1155615091
 AudioSource:
@@ -2293,7 +2295,7 @@ GameObject:
   - component: {fileID: 1506940887}
   - component: {fileID: 1506940888}
   m_Layer: 0
-  m_Name: Damaged
+  m_Name: PlayerDamaged
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2902,7 +2904,6 @@ Transform:
   - {fileID: 55317857}
   - {fileID: 972626979}
   - {fileID: 540372762}
-  - {fileID: 1155615090}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1943618549

@@ -34,7 +34,7 @@ public class Player : MonoBehaviour
     private AudioSource _playerDeathAudioSource;
     public void Awake()
     {
-        GameObject PlayerSounds = GameObject.Find("PlayerSounds");
+        GameObject PlayerSounds = GameObject.Find("Sounds");
         Sounds sounds = PlayerSounds.GetComponent<Sounds>();
         _playerDamagedAudioSource = sounds.DamagedPlayerAudioSource;
         _playerDeathAudioSource = sounds.DeathPlayerAudioSource;
