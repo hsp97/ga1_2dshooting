@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using _02.Scripts;
+using CartoonFX;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -43,8 +45,16 @@ public class Player : MonoBehaviour
         {
             _animator.SetTrigger("death");
         }
+        else
+        {
+            _animator.SetTrigger("hurt");
+            Cameras.StartShake();
+        }
     }
-
+    private void LateUpdate()
+    {
+        Cameras.CameraShake();
+    }
     public void Death()
     {
         Destroy(this.gameObject);

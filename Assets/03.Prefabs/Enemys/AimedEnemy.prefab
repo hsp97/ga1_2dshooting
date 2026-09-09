@@ -180,7 +180,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 205da0f26a421fb478185e2f8434ac41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AimedEnemy
-  _health: 100
+  _health: 200
   _damage: 30
   _item: {fileID: 6791340804867136192, guid: 102a92c097687bd4d82e616b01eb0634, type: 3}
   _animator: {fileID: 7564801222758907512}

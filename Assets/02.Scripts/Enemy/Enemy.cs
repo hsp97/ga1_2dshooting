@@ -33,7 +33,7 @@ public abstract class Enemy : MonoBehaviour
             // TODO: SO 를 사용해서 리펙토링
             // 이유1 : 배열을 사용했지만 각 아이템이 어떤 프리팹인지 알수가 없음
             // 이유2 : 각 Enemy 스폰 확률을 매직넘버로 하드코딩해서 유지보수가 어렵
-            if (value > 6)
+            if (value > 50)
             {
                 Instantiate(_item, transform.position, Quaternion.identity);
             }

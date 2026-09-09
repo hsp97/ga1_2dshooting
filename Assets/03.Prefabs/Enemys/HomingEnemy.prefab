@@ -180,7 +180,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf7a2b518c9ee964a8730a6a2be6bd79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HomingMove
-  _health: 100
+  _health: 200
   _damage: 10
   _item: {fileID: 6791340804867136192, guid: 102a92c097687bd4d82e616b01eb0634, type: 3}
   _animator: {fileID: 4224533175580795261}
