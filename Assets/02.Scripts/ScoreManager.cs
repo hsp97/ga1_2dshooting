@@ -1,4 +1,5 @@
 using TMPro;
+using UnityEditorInternal;
 using UnityEngine;
 
 public class ScoreManager : MonoBehaviour
@@ -7,7 +8,9 @@ public class ScoreManager : MonoBehaviour
     // 전역적으로 무엇을 뜻한지 안다.
     // 인스턴스(생성된 객체) 가 하나임을 보장한다. 그 누구가 한 개 라는것을 안다.
     // static(정적)
-    public static ScoreManager Instance;
+    private static ScoreManager _instance = null;
+
+    public static ScoreManager Instance => _instance;
     // 관리: 특정 데이터에 대한 무결성과 생성, 읽기, 수정, 삭제 등과 관련된 로직
     private int _bestScore;
     private int _currentScore;
@@ -17,7 +20,13 @@ public class ScoreManager : MonoBehaviour
 
     private void Awake()
     {
-        Instance = this;
+        // 늦게 생성된 매니저는 삭제 (단일성 보장)
+        if (_instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        _instance = this;
     }
     public void AddScore(int score)
     {
