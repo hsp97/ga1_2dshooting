@@ -17,6 +17,7 @@ public class ScoreManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _bestScoreTextUI;
     [SerializeField] private TextMeshProUGUI _currentScoreTextUI;
     private const string SaveKey = "BestScore";
+
     private void Awake()
     {
         // 늦게 생성된 매니저는 삭제 (단일성 보장)
@@ -25,6 +26,7 @@ public class ScoreManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
+
         _instance = this;
     }
 
@@ -41,6 +43,7 @@ public class ScoreManager : MonoBehaviour
         _bestScore = PlayerPrefs.GetInt(SaveKey, 0);
         Refresh();
     }
+
     public void AddScore(int score)
     {
         if (score <= 0) return;
@@ -53,6 +56,7 @@ public class ScoreManager : MonoBehaviour
             PlayerPrefs.SetInt(SaveKey, _bestScore);
             PlayerPrefs.Save();
         }
+
         Refresh();
     }
 
