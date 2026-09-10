@@ -26,15 +26,20 @@ public class PlayerAutoMove : MonoBehaviour
     private void TrackEnemy()
     {
         GameObject[] enemys = GameObject.FindGameObjectsWithTag("Enemy");
-        Vector3 enemyPosition;
+        if (enemys.Length == 0)
+        {
+            return;
+        }
         float enemyHypo = 0;
         _hypo = 9999;
         foreach (GameObject enemy in enemys)
         {
-            enemyPosition = enemy.transform.position;
+            Vector3 enemyPosition = enemy.transform.position;
             //Debug.Log($"적의 좌표({enemyPosition.x},{enemyPosition.y})");
             _distanceX = _position.x - enemyPosition.x;
             _distanceY = _position.y - enemyPosition.y;
+            // 빗변 같은 짓 안해도 거리 구하는 함수가 있다.
+            // Vector2.Distance(transform.position, enemyPosition);
             if (_hypo > _distanceX * _distanceX + _distanceY * _distanceY)
             {
                 _hypo = _distanceX * _distanceX + _distanceY * _distanceY;

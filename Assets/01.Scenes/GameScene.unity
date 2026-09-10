@@ -263,7 +263,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5058537866554621810, guid: 6089deb2093e58c4f93ea65123b8e3b5, type: 3}
       propertyPath: _coolTime
-      value: 0.3
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 5058537866554621810, guid: 6089deb2093e58c4f93ea65123b8e3b5, type: 3}
       propertyPath: SubBulletPrefab
@@ -271,7 +271,7 @@ PrefabInstance:
       objectReference: {fileID: 3017421980827012014, guid: 8376efd76f4ebd24f8d593c36314e0ae, type: 3}
     - target: {fileID: 5058537866554621810, guid: 6089deb2093e58c4f93ea65123b8e3b5, type: 3}
       propertyPath: _originCoolTime
-      value: 0.3
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 5058537866554621810, guid: 6089deb2093e58c4f93ea65123b8e3b5, type: 3}
       propertyPath: FirePointTransform
@@ -349,7 +349,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5058537866554621810, guid: 6089deb2093e58c4f93ea65123b8e3b5, type: 3}
       propertyPath: _coolTime
-      value: 0.3
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 5058537866554621810, guid: 6089deb2093e58c4f93ea65123b8e3b5, type: 3}
       propertyPath: SubBulletPrefab
@@ -357,7 +357,7 @@ PrefabInstance:
       objectReference: {fileID: 3017421980827012014, guid: 8376efd76f4ebd24f8d593c36314e0ae, type: 3}
     - target: {fileID: 5058537866554621810, guid: 6089deb2093e58c4f93ea65123b8e3b5, type: 3}
       propertyPath: _originCoolTime
-      value: 0.3
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 5058537866554621810, guid: 6089deb2093e58c4f93ea65123b8e3b5, type: 3}
       propertyPath: FirePointTransform
@@ -2193,6 +2193,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: faa6408d5fbf3bb4ba84569e17684cfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAutoMove
+  _speed: 10
 --- !u!1 &1288028894
 GameObject:
   m_ObjectHideFlags: 0
