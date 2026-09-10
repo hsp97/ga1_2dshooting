@@ -32,14 +32,11 @@ public class ScoreManager : MonoBehaviour
     {
         if (score <= 0) return;
         _currentScore += score;
+        Refresh();
         if (_currentScore > _bestScore)
         {
             _bestScore = _currentScore;
         }
-    }
-    private void Update()
-    {
-        Refresh();
     }
 
     private void Refresh()
