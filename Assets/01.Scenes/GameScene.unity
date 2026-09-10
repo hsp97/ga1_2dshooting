@@ -263,7 +263,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5058537866554621810, guid: 6089deb2093e58c4f93ea65123b8e3b5, type: 3}
       propertyPath: _coolTime
-      value: 0.5
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 5058537866554621810, guid: 6089deb2093e58c4f93ea65123b8e3b5, type: 3}
       propertyPath: SubBulletPrefab
@@ -271,7 +271,7 @@ PrefabInstance:
       objectReference: {fileID: 3017421980827012014, guid: 8376efd76f4ebd24f8d593c36314e0ae, type: 3}
     - target: {fileID: 5058537866554621810, guid: 6089deb2093e58c4f93ea65123b8e3b5, type: 3}
       propertyPath: _originCoolTime
-      value: 0.5
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 5058537866554621810, guid: 6089deb2093e58c4f93ea65123b8e3b5, type: 3}
       propertyPath: FirePointTransform
@@ -349,7 +349,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5058537866554621810, guid: 6089deb2093e58c4f93ea65123b8e3b5, type: 3}
       propertyPath: _coolTime
-      value: 0.5
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 5058537866554621810, guid: 6089deb2093e58c4f93ea65123b8e3b5, type: 3}
       propertyPath: SubBulletPrefab
@@ -357,7 +357,7 @@ PrefabInstance:
       objectReference: {fileID: 3017421980827012014, guid: 8376efd76f4ebd24f8d593c36314e0ae, type: 3}
     - target: {fileID: 5058537866554621810, guid: 6089deb2093e58c4f93ea65123b8e3b5, type: 3}
       propertyPath: _originCoolTime
-      value: 0.5
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 5058537866554621810, guid: 6089deb2093e58c4f93ea65123b8e3b5, type: 3}
       propertyPath: FirePointTransform
@@ -1950,6 +1950,7 @@ GameObject:
   - component: {fileID: 1267902997}
   - component: {fileID: 1267902998}
   - component: {fileID: 1267902999}
+  - component: {fileID: 1267903000}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -2180,6 +2181,18 @@ MonoBehaviour:
   _coolTime: 10
   _player: {fileID: 1267902991}
   BombPrefab: {fileID: 8184826129453761470, guid: 2e7d7a157d2be2c429fbeb8e8d4adabf, type: 3}
+--- !u!114 &1267903000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1267902991}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: faa6408d5fbf3bb4ba84569e17684cfd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerAutoMove
 --- !u!1 &1288028894
 GameObject:
   m_ObjectHideFlags: 0
