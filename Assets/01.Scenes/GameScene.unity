@@ -2194,6 +2194,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAutoMove
   _speed: 10
+  _stopTrackingY: -3
 --- !u!1 &1288028894
 GameObject:
   m_ObjectHideFlags: 0
