@@ -47,8 +47,7 @@ public abstract class Enemy : MonoBehaviour
             {
                 Instantiate(_item, transform.position, Quaternion.identity);
             }
-            ScoreManager scoreManager = GameObject.FindAnyObjectByType<ScoreManager>();
-            scoreManager.AddScore(100);
+            ScoreManager.Instance.AddScore(100);
             Destroy(this.gameObject);
         }
         _animator.SetTrigger("idle");
