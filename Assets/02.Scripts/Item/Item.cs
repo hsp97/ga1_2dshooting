@@ -50,7 +50,6 @@ public class Item : MonoBehaviour
             Move();
         }
     }
-
     private void Move()
     {
         Vector3 direction = _player.transform.position - transform.position;

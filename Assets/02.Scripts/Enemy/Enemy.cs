@@ -38,6 +38,7 @@ public abstract class Enemy : MonoBehaviour
         _enemyDamagedAudioSource.Play();
         if (_health <= 0)
         {
+            SpawnDeathEffect();
             int value = UnityEngine.Random.Range(1, 101);
             // TODO: SO 를 사용해서 리펙토링
             // 이유1 : 배열을 사용했지만 각 아이템이 어떤 프리팹인지 알수가 없음
@@ -46,8 +47,8 @@ public abstract class Enemy : MonoBehaviour
             {
                 Instantiate(_item, transform.position, Quaternion.identity);
             }
-
-            SpawnDeathEffect();
+            ScoreManager scoreManager = GameObject.FindAnyObjectByType<ScoreManager>();
+            scoreManager.AddScore(100);
             Destroy(this.gameObject);
         }
         _animator.SetTrigger("idle");
