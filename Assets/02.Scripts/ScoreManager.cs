@@ -1,5 +1,4 @@
 using TMPro;
-using UnityEditorInternal;
 using UnityEngine;
 
 public class ScoreManager : MonoBehaviour
@@ -12,8 +11,8 @@ public class ScoreManager : MonoBehaviour
 
     public static ScoreManager Instance => _instance;
     // 관리: 특정 데이터에 대한 무결성과 생성, 읽기, 수정, 삭제 등과 관련된 로직
-    private int _bestScore;
-    private int _currentScore;
+    private int _bestScore = 0;
+    private int _currentScore = 0;
     // UI 책임 추가 (텍스트메시 프로 참조)
     [SerializeField] private TextMeshProUGUI _bestScoreTextUI;
     [SerializeField] private TextMeshProUGUI _currentScoreTextUI;
@@ -27,6 +26,7 @@ public class ScoreManager : MonoBehaviour
             return;
         }
         _instance = this;
+        Refresh();
     }
     public void AddScore(int score)
     {
