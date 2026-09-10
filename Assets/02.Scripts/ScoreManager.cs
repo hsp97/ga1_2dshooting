@@ -4,7 +4,7 @@ using UnityEngine;
 public class ScoreManager : MonoBehaviour
 {
     // 싱글톤 패턴
-    // 전역적으로 무엇을 뜻한지 안다.
+    // 전역적으로 무엇을 뜻하는지 안다.
     // 인스턴스(생성된 객체) 가 하나임을 보장한다. 그 누구가 한 개 라는것을 안다.
     // static(정적)
     private static ScoreManager _instance = null;
@@ -28,14 +28,16 @@ public class ScoreManager : MonoBehaviour
         _instance = this;
     }
 
-    public void Start()
+    private void Start()
     {
         // 입력: Input.
         // 저장/불러오기: PlayerPrefs
+        /*
         if (PlayerPrefs.HasKey(SaveKey))
         {
             _bestScore = PlayerPrefs.GetInt(SaveKey);
         }
+        */
         _bestScore = PlayerPrefs.GetInt(SaveKey, 0);
         Refresh();
     }
