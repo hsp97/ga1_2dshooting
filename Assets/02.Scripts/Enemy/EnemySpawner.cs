@@ -15,7 +15,7 @@ public class EnemySpawner : MonoBehaviour
     [Header("스폰 간격")]
     [SerializeField] private float _spawnInterval = 3;
 
-    [SerializeField] private EnemySpawnDataTable _spawnDataTable;
+    [SerializeField] private EnemySpawnDataTableSO _spawnDataTable;
 
     private float _timer = 0;
 
@@ -39,7 +39,7 @@ public class EnemySpawner : MonoBehaviour
         int totalWeight = 0;
         foreach (EnemySpawnData data in _spawnDataTable.Datas)
         {
-            totalWeight += data.Weight;
+            totalWeight += data.WeightValue;
         }
 
         // 2. 전체 가중치 범위에서 랜덤한 정수를 뽑는다.
@@ -48,11 +48,11 @@ public class EnemySpawner : MonoBehaviour
         int cumulativeWeight = 0;
         foreach (EnemySpawnData data in _spawnDataTable.Datas)
         {
-            cumulativeWeight += data.Weight;
+            cumulativeWeight += data.WeightValue;
 
             if (randomWeight < cumulativeWeight)
             {
-                GameObject enemy = Instantiate(data.EnemyPrefab);
+                GameObject enemy = Instantiate(data.Prefab);
                 enemy.transform.position = transform.position;
                 break;
             }

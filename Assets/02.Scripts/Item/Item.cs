@@ -1,5 +1,7 @@
+using System;
 using UnityEngine;
 using static UnityEngine.Rendering.DebugUI;
+using Random = UnityEngine.Random;
 
 public class Item : MonoBehaviour
 {
@@ -7,31 +9,33 @@ public class Item : MonoBehaviour
     [SerializeField] private float _attackSpeedBuff = 0.1f;
     [SerializeField] private GameObject _getEffectPrefab;
 
+    [Header("스폰 간격")]
+    [SerializeField] private ItemTypeDataTableSO _itemTypeDatas;
+
     private GameObject _player;
     private float _timer = 0;
     private float _moveSpeed = 10f;
-    private float _random;
     private ItemType _itemType;
+
     void Start()
     {
-        _random = UnityEngine.Random.Range(0, 100);
         _itemType = CalculateRandom();
         SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
         spriteRenderer.color = Color.red;
 
         switch (_itemType)
         {
-            case ItemType.heal:
+            case ItemType.Heal:
             {
                 spriteRenderer.color = Color.green;
                 break;
             }
-            case ItemType.attackSpeed:
+            case ItemType.AttackSpeed:
             {
                 spriteRenderer.color = Color.blue;
                 break;
             }
-            case ItemType.moveSpeed:
+            case ItemType.MoveSpeed:
             {
                 spriteRenderer.color = Color.white;
                 break;
@@ -47,9 +51,12 @@ public class Item : MonoBehaviour
         _timer += Time.deltaTime;
         if (_timer > _waitTime)
         {
+            if (_player == null) return;
+
             Move();
         }
     }
+
     private void Move()
     {
         Vector3 direction = _player.transform.position - transform.position;
@@ -66,17 +73,17 @@ public class Item : MonoBehaviour
             {
                 // 심화과제1: 퍼사드 패턴(패턴: 객체지향에서 자주 일어나는 설계 문제를 잘 풀어내도록 경험에 의해 정리해놓은 공식같은거)
                 // 심화과제2: 아이템 졸류가 폭발적으로 증가할 경우에는 -> 조합 패턴을 사용해라
-                case ItemType.heal:
+                case ItemType.Heal:
                 {
                     collision.gameObject.GetComponent<Player>().HealHp();
                     break;
                 }
-                case ItemType.attackSpeed:
+                case ItemType.AttackSpeed:
                 {
                     collision.gameObject.GetComponent<Player>().AddAttackSpeedBuff(_attackSpeedBuff);
                     break;
                 }
-                case ItemType.moveSpeed:
+                case ItemType.MoveSpeed:
                 {
                     collision.gameObject.GetComponent<Player>().AddMoveSpeedBuff();
                     break;
@@ -93,17 +100,23 @@ public class Item : MonoBehaviour
         // TODO: SO 를 사용해서 리펙토링
         // 이유1 : 배열을 사용했지만 각 아이템이 어떤 프리팹인지 알수가 없음
         // 이유2 : 각 Enemy 스폰 확률을 매직넘버로 하드코딩해서 유지보수가 어렵
-        if (_random >= 66)
+        int totalWeight = 0;
+        foreach (ItemTypeData data in _itemTypeDatas.Datas)
         {
-            return ItemType.heal;
+            totalWeight += data.Weight;
         }
-        else if (_random is < 66 and >= 33)
+
+        int randomWeight = Random.Range(0, totalWeight);
+        int cumulativeWeight = 0;
+        foreach (ItemTypeData data in _itemTypeDatas.Datas)
         {
-            return ItemType.attackSpeed;
+            cumulativeWeight += data.Weight;
+            if (randomWeight < cumulativeWeight)
+            {
+                return data.Type;
+            }
         }
-        else
-        {
-            return ItemType.moveSpeed;
-        }
+
+        return ItemType.Heal;
     }
 }

@@ -10,7 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1b64a72efb39e4d41b2eec6d96e33eab, type: 3}
-  m_Name: MoveSpeedUp
-  m_EditorClassIdentifier: Assembly-CSharp::ItemTypeSO
-  ItemType: 2
-  chance: 30
+  m_Name: ItemTypeSO
+  m_EditorClassIdentifier: Assembly-CSharp::ItemTypeDataTableSO
+  Datas:
+  - Type: 0
+    Weight: 10
+  - Type: 1
+    Weight: 80
+  - Type: 2
+    Weight: 10

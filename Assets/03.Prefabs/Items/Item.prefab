@@ -109,6 +109,7 @@ MonoBehaviour:
   _waitTime: 3
   _attackSpeedBuff: 0.1
   _getEffectPrefab: {fileID: 8771972552311404799, guid: bbf9e36a48d6c5648a13889afab076fd, type: 3}
+  _itemTypeDatas: {fileID: 11400000, guid: 849bd2978e8873649a36defe4b4624e5, type: 2}
 --- !u!58 &8596680242942350165
 CircleCollider2D:
   m_ObjectHideFlags: 0
