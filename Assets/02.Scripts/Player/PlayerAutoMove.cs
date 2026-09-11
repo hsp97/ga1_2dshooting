@@ -3,7 +3,7 @@ using UnityEngine;
 public class PlayerAutoMove : MonoBehaviour
 {
     [SerializeField] private float _speed;
-    [SerializeField] private int _stopTrackingY = 2;
+    [SerializeField] private int _stopTrackingY = 0;
 
     private GameObject _target = null;
 
