@@ -10,6 +10,16 @@ public class Bullet : MonoBehaviour
     private void Awake()
     {
         _audioSource = GetComponent<AudioSource>();
+    }
+
+    public void OnSpawn()
+    {
+        // 프리팹이 풀에 의해서 활성화 될때마다 초기화 하는 코드들이 들어간다.
+        PlaySound();
+    }
+
+    private void PlaySound()
+    {
         _audioSource.pitch = UnityEngine.Random.Range(-1.5f, 1.5f);
         _audioSource.Play();
     }
@@ -28,7 +38,7 @@ public class Bullet : MonoBehaviour
         {
             Enemy enemy = collider.gameObject.GetComponent<Enemy>();
             enemy.CalculateHealth(Damage);
-            Destroy(this.gameObject);
+            this.gameObject.SetActive(false);
         }
     }
 
