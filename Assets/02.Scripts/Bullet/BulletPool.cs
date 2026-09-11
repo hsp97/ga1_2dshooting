@@ -13,11 +13,14 @@ public class BulletPool : MonoBehaviour
     // 필요 속성
     [Header("총알 프리팹")]
     [SerializeField] private Bullet _bulletPrefab;
+    [SerializeField] private Bullet _subBulletPrefab;
 
     [Header("풀 사이즈")]
     [SerializeField] private int _poolSize = 50;
+    [SerializeField] private int _subPoolSize = 50;
 
     private Bullet[] _pool;
+    private Bullet[] _subPool;
 
     private void Awake()
     {
@@ -36,11 +39,34 @@ public class BulletPool : MonoBehaviour
             bullet.gameObject.SetActive(false); // 당장 사용하지 않기에 비활성화
             _pool[i] = bullet;
         }
+
+        _subPool = new Bullet[_subPoolSize];
+        for (int i = 0; i < _subPoolSize; i++)
+        {
+            Bullet bullet = Instantiate(_subBulletPrefab, gameObject.transform);
+            bullet.gameObject.SetActive(false); // 당장 사용하지 않기에 비활성화
+            _subPool[i] = bullet;
+        }
     }
 
     public Bullet GetBullet()
     {
         foreach (Bullet bullet in _pool)
+        {
+            if (bullet.gameObject.activeSelf == false)
+            {
+                bullet.gameObject.SetActive(true);
+                bullet.OnSpawn();
+                return bullet;
+            }
+        }
+
+        return null;
+    }
+
+    public Bullet GetSubBullet()
+    {
+        foreach (Bullet bullet in _subPool)
         {
             if (bullet.gameObject.activeSelf == false)
             {
