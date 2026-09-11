@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -7,7 +8,7 @@ public class Item : MonoBehaviour
     [SerializeField] private float _attackSpeedBuff = 0.1f;
     [SerializeField] private GameObject _getEffectPrefab;
 
-    [Header("스폰 간격")]
+    [Header("아이템 타입")]
     [SerializeField] private ItemTypeDataTableSO _itemTypeDatas;
 
     private GameObject _player;
@@ -15,8 +16,9 @@ public class Item : MonoBehaviour
     private float _moveSpeed = 10f;
     private ItemType _itemType;
 
-    void Start()
+    void OnEnable()
     {
+        ResetTimer();
         _itemType = CalculateRandom();
         SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
         spriteRenderer.color = Color.red;
@@ -55,6 +57,11 @@ public class Item : MonoBehaviour
         }
     }
 
+    private void ResetTimer()
+    {
+        _timer = 0;
+    }
+
     private void Move()
     {
         Vector3 direction = _player.transform.position - transform.position;
@@ -89,15 +96,12 @@ public class Item : MonoBehaviour
             }
 
             Instantiate(_getEffectPrefab, transform.position, Quaternion.identity);
-            Destroy(this.gameObject);
+            this.gameObject.SetActive(false);
         }
     }
 
     private ItemType CalculateRandom()
     {
-        // TODO: SO 를 사용해서 리펙토링
-        // 이유1 : 배열을 사용했지만 각 아이템이 어떤 프리팹인지 알수가 없음
-        // 이유2 : 각 Enemy 스폰 확률을 매직넘버로 하드코딩해서 유지보수가 어렵
         int totalWeight = 0;
         foreach (ItemTypeData data in _itemTypeDatas.Datas)
         {

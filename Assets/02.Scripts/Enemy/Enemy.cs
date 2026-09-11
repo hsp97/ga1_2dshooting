@@ -3,14 +3,11 @@ using UnityEngine;
 
 public abstract class Enemy : MonoBehaviour
 {
-    [SerializeField]
-    protected float _health;
+    [SerializeField] protected float _health;
 
-    [SerializeField]
-    private float _damage;
+    [SerializeField] private float _damage;
 
-    [SerializeField]
-    private GameObject _item;
+    [SerializeField] private GameObject _item;
     private Animator _animator;
     // Todo: 에너미가 공격당할때 재생시켜주는 피격 사운드 
     private AudioSource _enemyDamagedAudioSource;
@@ -29,6 +26,7 @@ public abstract class Enemy : MonoBehaviour
     {
         Move();
     }
+
     protected abstract void Move();
 
     public void CalculateHealth(float damage)
@@ -45,11 +43,14 @@ public abstract class Enemy : MonoBehaviour
             // 이유2 : 각 Enemy 스폰 확률을 매직넘버로 하드코딩해서 유지보수가 어렵
             if (value > 50)
             {
-                Instantiate(_item, transform.position, Quaternion.identity);
+                Item item = ItemPool.Instance.GetItem();
+                item.transform.position = transform.position;
             }
+
             ScoreManager.Instance.AddScore(100);
             Destroy(this.gameObject);
         }
+
         _animator.SetTrigger("idle");
     }
 

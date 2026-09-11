@@ -34,7 +34,7 @@ public class BulletPool : MonoBehaviour
         _instance = this;
         // 풀 크기만큼 총알을 미리 만든다.
         _pool = new Bullet[_poolSize];
-        _subPool = new Bullet[_poolSize];
+        _subPool = new Bullet[_subPoolSize];
         foreach (Bullet _bulletPrefab in _bulletPrefabs)
         {
             for (int i = 0; i < _poolSize; i++)
