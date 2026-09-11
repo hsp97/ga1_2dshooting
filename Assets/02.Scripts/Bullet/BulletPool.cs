@@ -11,9 +11,10 @@ public class BulletPool : MonoBehaviour
     // 메모리 할당(객체의 생성)과 해제(파괴)를 최소화해서 성능 향상
 
     // 필요 속성
-    [Header("총알 프리팹")]
-    [SerializeField] private Bullet _bulletPrefab;
-    [SerializeField] private Bullet _subBulletPrefab;
+    [Header("총알 프리팹들")]
+    [SerializeField] private Bullet[] _bulletPrefabs;
+    // [SerializeField] private Bullet _bulletPrefab;
+    // [SerializeField] private Bullet _subBulletPrefab;
 
     [Header("풀 사이즈")]
     [SerializeField] private int _poolSize = 50;
@@ -33,40 +34,44 @@ public class BulletPool : MonoBehaviour
         _instance = this;
         // 풀 크기만큼 총알을 미리 만든다.
         _pool = new Bullet[_poolSize];
-        for (int i = 0; i < _poolSize; i++)
+        _subPool = new Bullet[_poolSize];
+        foreach (Bullet _bulletPrefab in _bulletPrefabs)
         {
-            Bullet bullet = Instantiate(_bulletPrefab, gameObject.transform);
-            bullet.gameObject.SetActive(false); // 당장 사용하지 않기에 비활성화
-            _pool[i] = bullet;
-        }
+            for (int i = 0; i < _poolSize; i++)
+            {
+                Bullet bullet = Instantiate(_bulletPrefab, gameObject.transform);
+                bullet.gameObject.SetActive(false); // 당장 사용하지 않기에 비활성화
 
-        _subPool = new Bullet[_subPoolSize];
-        for (int i = 0; i < _subPoolSize; i++)
-        {
-            Bullet bullet = Instantiate(_subBulletPrefab, gameObject.transform);
-            bullet.gameObject.SetActive(false); // 당장 사용하지 않기에 비활성화
-            _subPool[i] = bullet;
+                switch (bullet.Type)
+                {
+                    case BulletType.Sub:
+                    {
+                        _subPool[i] = bullet;
+                        break;
+                    }
+                    case BulletType.Main:
+                    {
+                        _pool[i] = bullet;
+                        break;
+                    }
+                }
+            }
         }
     }
 
     public Bullet GetBullet()
     {
-        foreach (Bullet bullet in _pool)
-        {
-            if (bullet.gameObject.activeSelf == false)
-            {
-                bullet.gameObject.SetActive(true);
-                bullet.OnSpawn();
-                return bullet;
-            }
-        }
-
-        return null;
+        return BulletSetting(_pool);
     }
 
     public Bullet GetSubBullet()
     {
-        foreach (Bullet bullet in _subPool)
+        return BulletSetting(_subPool);
+    }
+
+    private Bullet BulletSetting(Bullet[] pool)
+    {
+        foreach (Bullet bullet in pool)
         {
             if (bullet.gameObject.activeSelf == false)
             {

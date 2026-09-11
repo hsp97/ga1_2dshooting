@@ -1,9 +1,14 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
     private AudioSource _audioSource;
+
+    [SerializeField] BulletType _bulletType;
+    public BulletType Type => _bulletType;
+
     public float MoveSpeed;
     public float Damage;
 
