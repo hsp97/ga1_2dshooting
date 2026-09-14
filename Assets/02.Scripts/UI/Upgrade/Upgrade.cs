@@ -3,6 +3,8 @@ using UnityEngine;
 [System.Serializable]
 public class Upgrade
 {
+    // 도메인 : 데이터 + 규칙
+
     // 기획자가 채우는 속성
     [SerializeField] private string _name;
     public string Name => _name;
@@ -11,7 +13,6 @@ public class Upgrade
     [SerializeField] private float _increaseValue;
     [SerializeField] private float _defaultCost;
     [SerializeField] private float _increaseCost;
-
     // 실행중에 동적으로 바뀌 속성
     private int _level;
     public int Level => _level;
@@ -21,7 +22,6 @@ public class Upgrade
     public float NextValue => _nextValue;
     private int _cost;
     public int Cost => _cost;
-
     public Upgrade(int level, string name, float defaultValue, float increaseValue, float increaseCost)
     {
         _level = level;
