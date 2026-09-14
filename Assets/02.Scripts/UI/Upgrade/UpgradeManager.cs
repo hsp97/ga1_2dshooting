@@ -18,13 +18,21 @@ public class UpgradeManager : MonoBehaviour
     private void Awake()
     {
         // 늦게 태어난 매니저는 나는 늦었네~ 하면서 삭제
-        if (_instance != null)
+        if (_instance != null && _instance != this)
         {
             Destroy(gameObject);
             return;
         }
 
         _instance = this;
+    }
+
+    private void OnDestroy()
+    {
+        if(_instance == this)
+        {
+            _instance = null;
+        }
     }
 
     private void Start()
