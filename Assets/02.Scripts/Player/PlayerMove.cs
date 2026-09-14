@@ -142,6 +142,7 @@ public class PlayerMove : MonoBehaviour
             normalizedDirection /= 2;
         }
 
+        _speed = _speed + UpgradeManager.Instance.Upgrades[2].CurrentValue;
         transform.Translate(normalizedDirection * _speed * Time.deltaTime);
 
         var positionY = transform.position;

@@ -42,6 +42,7 @@ public class Bullet : MonoBehaviour
         if (collider.gameObject.CompareTag("Enemy"))
         {
             Enemy enemy = collider.gameObject.GetComponent<Enemy>();
+            Damage += UpgradeManager.Instance.Upgrades[0].CurrentValue;
             enemy.CalculateHealth(Damage);
             this.gameObject.SetActive(false);
         }
