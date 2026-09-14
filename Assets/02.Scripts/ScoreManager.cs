@@ -60,6 +60,13 @@ public class ScoreManager : MonoBehaviour
         Refresh();
     }
 
+    public void DepleteScore(int score)
+    {
+        if (score <= 0 || _currentScore < score) return;
+        _currentScore -= score;
+        Refresh();
+    }
+
     private void Refresh()
     {
         _bestScoreTextUI.text = $"Best Score: {_bestScore:N0}";
