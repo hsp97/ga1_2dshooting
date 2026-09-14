@@ -13,6 +13,8 @@ public class UI_Upgrade : MonoBehaviour
 
     public void OnClick()
     {
+        // 골드 매니저에게 돈이 있는지 물어보고 돈이 있다면 차감 후 업그레이드 호출
+
         // 버튼이 클릭되면 매니저에게 레벨업 해줘라고 요청한다.
         UpgradeManager.Instance.LevelUp(_index);
     }
