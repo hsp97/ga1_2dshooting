@@ -15,8 +15,16 @@ public class PlayerFire : MonoBehaviour
     public float GetCoolTime => _coolTime;
     private bool _coolDown = false;
     public float _originCoolTime;
-    private bool _autoMode = false;
+
     private string _objectName;
+
+    // - 오토모드
+    private bool _autoMode = false;
+
+    public void SetAuto(bool auto)
+    {
+        _autoMode = auto;
+    }
 
     private void Start()
     {
