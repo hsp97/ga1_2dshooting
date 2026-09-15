@@ -8,6 +8,7 @@ public class Boss : Enemy
 
     private void Start()
     {
+        Destroy(gameObject);
         _player = GameObject.FindWithTag("Player");
         if (_player == null)
         {
