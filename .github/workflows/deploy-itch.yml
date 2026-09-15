@@ -2,17 +2,13 @@ name: Deploy to itch.io
 
 on:
   push:
-    branches: [main]
-    paths:
-      - 'Assets/**'
-      - 'Packages/**'
-      - 'ProjectSettings/**'
-      - '.github/workflows/**'
-  workflow_dispatch:
+    tags:
+      - 'v*'            # v1.0.0, v0.2.3-beta 등
+  workflow_dispatch:     # 디버깅용 수동 실행
 
 concurrency:
   group: itch-deploy
-  cancel-in-progress: true
+  cancel-in-progress: false   # 릴리스는 중간에 끊지 않는 게 안전
 
 env:
   ITCH_USER: hyunpark
@@ -23,12 +19,23 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
+      # Unity 이미지가 커서 기본 러너 디스크가 자주 부족해짐
       - name: Free disk space
         run: sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc
 
       - uses: actions/checkout@v4
         with:
           lfs: true
+
+      # 태그 실행이면 태그명을, 수동 실행이면 dev 버전을 사용
+      - name: Resolve version
+        id: ver
+        run: |
+          if [ "$GITHUB_REF_TYPE" = "tag" ]; then
+            echo "value=${GITHUB_REF_NAME#v}" >> "$GITHUB_OUTPUT"
+          else
+            echo "value=0.0.0-dev.${GITHUB_RUN_NUMBER}" >> "$GITHUB_OUTPUT"
+          fi
 
       - uses: actions/cache@v4
         with:
@@ -42,10 +49,13 @@ jobs:
           UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
           UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
         with:
-          unityVersion: auto          # ProjectVersion.txt에서 읽음
+          unityVersion: auto              # ProjectVersion.txt에서 자동 인식
           targetPlatform: WebGL
           buildName: ${{ env.BUILD_NAME }}
+          versioning: Custom
+          version: ${{ steps.ver.outputs.value }}
 
+      # Docker 컨테이너가 root로 생성한 산출물이라 권한 정리 필요
       - name: Fix permissions
         run: sudo chown -R $USER:$USER build
 
@@ -64,5 +74,5 @@ jobs:
           BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
         run: |
           ./butler push "build/WebGL/$BUILD_NAME" "$ITCH_USER/$ITCH_GAME:html" \
-            --userversion "0.1.${{ github.run_number }}"
+            --userversion "${{ steps.ver.outputs.value }}"
           ./butler status "$ITCH_USER/$ITCH_GAME:html"
