@@ -1,3 +1,4 @@
+using UnityEditor.ShaderGraph.Serialization;
 using UnityEngine;
 
 public class UpgradeManager : MonoBehaviour
@@ -71,20 +72,35 @@ public class UpgradeManager : MonoBehaviour
     {
         // 데이터 저장은 유의미한 정보만 저장한다.
         // 그래서 레벨만 저장한다.
+        UpgradeSaveData saveData = new UpgradeSaveData(_upgrades.Length);
         for (int i = 0; i < _upgrades.Length; i++)
         {
-            PlayerPrefs.SetInt($"Upgrade.{i}.Level", _upgrades[i].Level);
+            saveData.Name[i] = _upgrades[i].Name;
+            saveData.Level[i] = _upgrades[i].Level;
         }
+
+        // json 포맷으로 문자열 변환으로
+        // 키:밸류 형태로 저장한 형태
+        string json = JsonUtility.ToJson(saveData);
+        PlayerPrefs.SetString("UpgradeSaveData", json);
 
         PlayerPrefs.Save();
     }
 
     private void Load()
     {
+        if (!PlayerPrefs.HasKey("UpgradeSaveData"))
+        {
+            return;
+        }
+
+        string json = PlayerPrefs.GetString("UpgradeSaveData");
+
+        UpgradeSaveData saveData = JsonUtility.FromJson<UpgradeSaveData>(json);
+
         for (int i = 0; i < _upgrades.Length; i++)
         {
-            int level = PlayerPrefs.GetInt($"Upgrade.{i}.Level");
-            _upgrades[i].SetLevel(level);
+            _upgrades[i].SetLevel(saveData.Level[i]);
         }
     }
 }

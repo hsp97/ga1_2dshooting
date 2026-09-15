@@ -89,9 +89,9 @@ public class PlayerFire : MonoBehaviour
                 }
             }
 
-            _originCoolTime = _originCoolTime - UpgradeManager.Instance.Upgrades[1].CurrentValue;
+            float _finalCoolTime = _originCoolTime - UpgradeManager.Instance.Upgrades[1].CurrentValue;
             _coolDown = true;
-            _coolTime = _originCoolTime;
+            _coolTime = _finalCoolTime;
         }
     }
 
