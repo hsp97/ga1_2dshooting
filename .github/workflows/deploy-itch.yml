@@ -1,0 +1,31 @@
+name: Deploy to itch.io
+
+on:
+  push:
+    tags: ['v*']          # v1.0.0 태그 푸시 시 배포
+  workflow_dispatch:       # 수동 실행도 허용
+
+env:
+  ITCH_USER: hyunpark
+  ITCH_GAME: ga1-shooting   # URL의 프로젝트명
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # 서드파티 액션 대신 공식 배포본을 직접 받는 게 의존성/신뢰 면에서 깔끔함
+      - name: Setup butler
+        run: |
+          curl -L -o butler.zip https://broth.itch.zone/butler/linux-amd64/LATEST/archive/default
+          unzip butler.zip
+          chmod +x butler
+          ./butler -V
+
+      - name: Push to itch.io
+        env:
+          BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
+        run: |
+          ./butler push ./build "$ITCH_USER/$ITCH_GAME:html" \
+            --userversion "${GITHUB_REF_NAME#v}"
