@@ -76,3 +76,12 @@ jobs:
           ./butler push "build/WebGL/$BUILD_NAME" "$ITCH_USER/$ITCH_GAME:html" \
             --userversion "${{ steps.ver.outputs.value }}"
           ./butler status "$ITCH_USER/$ITCH_GAME:html"
+        - name: Verify Unity secrets
+          env:
+            UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+            UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+            UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+          run: |
+            echo "LICENSE  length: ${#UNITY_LICENSE}"
+            echo "EMAIL    length: ${#UNITY_EMAIL}"
+            echo "PASSWORD length: ${#UNITY_PASSWORD}"
