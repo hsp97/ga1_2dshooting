@@ -51,8 +51,8 @@ public class PlayerMove : MonoBehaviour
         }
 
         // 1. 키보드 입력을 받는다.
-        _h = Input.GetAxis("Horizontal"); // 키보드 왼/오른쪽 입력 상태에 따라(서서히 증가 및 감소) -1f ~ 0 ~ 1f
-        _v = Input.GetAxis("Vertical"); // 키보드 위/아래 입력 상태에 따라(서서히 증가 및 감소) -1f ~ 0 ~ 1f
+        _h = SimpleInput.GetAxis("Horizontal"); // 키보드 왼/오른쪽 입력 상태에 따라(서서히 증가 및 감소) -1f ~ 0 ~ 1f
+        _v = SimpleInput.GetAxis("Vertical"); // 키보드 위/아래 입력 상태에 따라(서서히 증가 및 감소) -1f ~ 0 ~ 1f
         string mutiply = "";
         // float h = Input.GetAxisRaw("Horizontal");   //곧바로 -1 0 1 반환
         // float v = Input.GetAxisRaw("Vertical");   //곧바로 -1 0 1 반환
