@@ -2,20 +2,56 @@ name: Deploy to itch.io
 
 on:
   push:
-    tags: ['v*']          # v1.0.0 태그 푸시 시 배포
-  workflow_dispatch:       # 수동 실행도 허용
+    branches: [main]
+    paths:
+      - 'Assets/**'
+      - 'Packages/**'
+      - 'ProjectSettings/**'
+      - '.github/workflows/**'
+  workflow_dispatch:
+
+concurrency:
+  group: itch-deploy
+  cancel-in-progress: true
 
 env:
   ITCH_USER: hyunpark
-  ITCH_GAME: ga1-shooting   # URL의 프로젝트명
+  ITCH_GAME: ga1-shooting
+  BUILD_NAME: ga1-shooting
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Free disk space
+        run: sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc
 
-      # 서드파티 액션 대신 공식 배포본을 직접 받는 게 의존성/신뢰 면에서 깔끔함
+      - uses: actions/checkout@v4
+        with:
+          lfs: true
+
+      - uses: actions/cache@v4
+        with:
+          path: Library
+          key: Library-WebGL-${{ hashFiles('Assets/**', 'Packages/**', 'ProjectSettings/**') }}
+          restore-keys: Library-WebGL-
+
+      - uses: game-ci/unity-builder@v5
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+        with:
+          unityVersion: auto          # ProjectVersion.txt에서 읽음
+          targetPlatform: WebGL
+          buildName: ${{ env.BUILD_NAME }}
+
+      - name: Fix permissions
+        run: sudo chown -R $USER:$USER build
+
+      - name: Verify build output
+        run: ls -R build
+
       - name: Setup butler
         run: |
           curl -L -o butler.zip https://broth.itch.zone/butler/linux-amd64/LATEST/archive/default
@@ -27,5 +63,6 @@ jobs:
         env:
           BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
         run: |
-          ./butler push ./build "$ITCH_USER/$ITCH_GAME:html" \
-            --userversion "${GITHUB_REF_NAME#v}"
+          ./butler push "build/WebGL/$BUILD_NAME" "$ITCH_USER/$ITCH_GAME:html" \
+            --userversion "0.1.${{ github.run_number }}"
+          ./butler status "$ITCH_USER/$ITCH_GAME:html"
