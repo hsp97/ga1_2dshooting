@@ -22,6 +22,7 @@ public class Upgrade
     public float NextValue => _nextValue;
     private int _cost;
     public int Cost => _cost;
+
     public Upgrade(int level, string name, float defaultValue, float increaseValue, float increaseCost)
     {
         _level = level;
@@ -30,6 +31,12 @@ public class Upgrade
         _increaseValue = increaseValue;
         _increaseCost = increaseCost;
 
+        Calculate();
+    }
+
+    public void SetLevel(int level)
+    {
+        _level = level;
         Calculate();
     }
 

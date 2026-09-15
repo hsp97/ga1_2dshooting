@@ -29,7 +29,7 @@ public class UpgradeManager : MonoBehaviour
 
     private void OnDestroy()
     {
-        if(_instance == this)
+        if (_instance == this)
         {
             _instance = null;
         }
@@ -37,11 +37,13 @@ public class UpgradeManager : MonoBehaviour
 
     private void Start()
     {
+        Load();
         RefreshUI();
     }
 
     public void LevelUp(int index)
     {
+        // Todo: 묻지말고 시켜라
         Upgrade upgrade = _upgrades[index];
         if (ScoreManager.Instance.Score < upgrade.Cost)
         {
@@ -51,6 +53,7 @@ public class UpgradeManager : MonoBehaviour
         ScoreManager.Instance.SpendScore(upgrade.Cost);
 
         _upgrades[index].LevelUp();
+        Save();
 
         RefreshUI();
     }
@@ -61,6 +64,27 @@ public class UpgradeManager : MonoBehaviour
         foreach (UI_Upgrade uiUpgrade in _uiUpgrades)
         {
             uiUpgrade.Refresh();
+        }
+    }
+
+    private void Save()
+    {
+        // 데이터 저장은 유의미한 정보만 저장한다.
+        // 그래서 레벨만 저장한다.
+        for (int i = 0; i < _upgrades.Length; i++)
+        {
+            PlayerPrefs.SetInt($"Upgrade.{i}.Level", _upgrades[i].Level);
+        }
+
+        PlayerPrefs.Save();
+    }
+
+    private void Load()
+    {
+        for (int i = 0; i < _upgrades.Length; i++)
+        {
+            int level = PlayerPrefs.GetInt($"Upgrade.{i}.Level");
+            _upgrades[i].SetLevel(level);
         }
     }
 }
