@@ -7,7 +7,6 @@ public class UpgradeManager : MonoBehaviour
     private static UpgradeManager _instance = null;
     public static UpgradeManager Instance => _instance;
 
-
     // 업그레이드 도메인 클래스들
     [SerializeField] private Upgrade[] _upgrades;
     public Upgrade[] Upgrades => _upgrades;

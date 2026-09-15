@@ -14,6 +14,7 @@ public class ScoreManager : MonoBehaviour
     private int _bestScore = 0;
     private int _currentScore = 0;
     public int Score => _currentScore;
+    public int BestScore => _bestScore;
     // UI 책임 추가 (텍스트메시 프로 참조)
     [SerializeField] private TextMeshProUGUI _bestScoreTextUI;
     [SerializeField] private TextMeshProUGUI _currentScoreTextUI;
