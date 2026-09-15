@@ -12,7 +12,6 @@ public class Boss : Enemy
         _player = GameObject.FindWithTag("Player");
         if (_player == null)
         {
-            Debug.LogError("No player found");
             return;
         }
     }
