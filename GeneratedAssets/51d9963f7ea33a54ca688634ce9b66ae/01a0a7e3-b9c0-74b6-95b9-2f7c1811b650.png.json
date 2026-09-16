@@ -1,0 +1,31 @@
+{
+    "asset": "51d9963f7ea33a54ca688634ce9b66ae",
+    "fileName": "01a0a7e3-b9c0-74b6-95b9-2f7c1811b650.png",
+    "prompt": "Mobile game action button, circular glowing neon green and gold auto-fire skill button, shiny crystal bevel, stylized 2D arcade shooter UI icon, centered on transparent background",
+    "negativePrompt": "",
+    "model": "game-ui-essentials-2",
+    "modelName": "Game UI Essentials 2.0",
+    "customSeed": -1,
+    "w3CTraceId": "",
+    "feedback": 0,
+    "refinementMode": "Generation",
+    "pixelateTargetSize": 0,
+    "pixelateKeepImageSize": false,
+    "pixelatePixelBlockSize": 0,
+    "pixelatePixelGridSize": 0,
+    "pixelateMode": 0,
+    "pixelateOutlineThickness": 0,
+    "doodles": {
+        "m_Items": []
+    },
+    "upscaleFactor": 0,
+    "dimensions": {
+        "width": 1024,
+        "height": 1024
+    },
+    "spriteSheet": false,
+    "duration": 0.0,
+    "dynamicParams": {
+        "serializedData": []
+    }
+}

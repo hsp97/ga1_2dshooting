@@ -1,0 +1,31 @@
+{
+    "asset": "3aa2f6089ebbfa349a8ace279bbb09d8",
+    "fileName": "01a0a7e4-41cf-736f-9694-a632bfa29f66.png",
+    "prompt": "Mobile sci-fi shooter upgrade card panel frame, rounded rectangular holographic futuristic tech container, glowing cyan and gold borders, clean sleek UI frame for mobile game upgrade menu, centered on transparent background",
+    "negativePrompt": "",
+    "model": "game-ui-essentials-2",
+    "modelName": "Game UI Essentials 2.0",
+    "customSeed": -1,
+    "w3CTraceId": "",
+    "feedback": 0,
+    "refinementMode": "Generation",
+    "pixelateTargetSize": 0,
+    "pixelateKeepImageSize": false,
+    "pixelatePixelBlockSize": 0,
+    "pixelatePixelGridSize": 0,
+    "pixelateMode": 0,
+    "pixelateOutlineThickness": 0,
+    "doodles": {
+        "m_Items": []
+    },
+    "upscaleFactor": 0,
+    "dimensions": {
+        "width": 1024,
+        "height": 1024
+    },
+    "spriteSheet": false,
+    "duration": 0.0,
+    "dynamicParams": {
+        "serializedData": []
+    }
+}

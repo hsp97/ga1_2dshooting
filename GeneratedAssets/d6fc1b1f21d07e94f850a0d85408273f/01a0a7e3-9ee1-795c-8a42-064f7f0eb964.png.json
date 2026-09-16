@@ -1,0 +1,31 @@
+{
+    "asset": "d6fc1b1f21d07e94f850a0d85408273f",
+    "fileName": "01a0a7e3-9ee1-795c-8a42-064f7f0eb964.png",
+    "prompt": "Sci-fi arcade mobile game bomb attack button, circular metallic button with glowing nuclear bomb hazard icon, vibrant neon cyan and orange highlights, crisp stylized 2D vector game UI icon, centered on transparent background",
+    "negativePrompt": "",
+    "model": "game-ui-essentials-2",
+    "modelName": "Game UI Essentials 2.0",
+    "customSeed": -1,
+    "w3CTraceId": "",
+    "feedback": 0,
+    "refinementMode": "Generation",
+    "pixelateTargetSize": 0,
+    "pixelateKeepImageSize": false,
+    "pixelatePixelBlockSize": 0,
+    "pixelatePixelGridSize": 0,
+    "pixelateMode": 0,
+    "pixelateOutlineThickness": 0,
+    "doodles": {
+        "m_Items": []
+    },
+    "upscaleFactor": 0,
+    "dimensions": {
+        "width": 1024,
+        "height": 1024
+    },
+    "spriteSheet": false,
+    "duration": 0.0,
+    "dynamicParams": {
+        "serializedData": []
+    }
+}
